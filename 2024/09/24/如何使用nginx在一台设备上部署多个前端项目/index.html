@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>如何使用nginx在一台设备上部署多个前端项目 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="如果在 CentOS 系统上使用 Nginx 部署多个 Vue 前端项目，可以通过为每个项目配置不同的服务器块（server blocks）或使用不同的路径来实现。以下是详细的步骤： 1. 准备工作a. 更新系统软件包首先，确保系统的软件包是最新的。 1sudo yum update -y  b. 安装 Nginx如果尚未安装 Nginx，可以通过以下命令进行安装： 12sudo yum inst">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用nginx在一台设备上部署多个前端项目">
+<meta property="og:url" content="http://example.com/2024/09/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E5%9C%A8%E4%B8%80%E5%8F%B0%E8%AE%BE%E5%A4%87%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="如果在 CentOS 系统上使用 Nginx 部署多个 Vue 前端项目，可以通过为每个项目配置不同的服务器块（server blocks）或使用不同的路径来实现。以下是详细的步骤： 1. 准备工作a. 更新系统软件包首先，确保系统的软件包是最新的。 1sudo yum update -y  b. 安装 Nginx如果尚未安装 Nginx，可以通过以下命令进行安装： 12sudo yum inst">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-24T08:18:33.000Z">
+<meta property="article:modified_time" content="2024-09-28T13:41:23.280Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-如何使用nginx在一台设备上部署多个前端项目" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E5%9C%A8%E4%B8%80%E5%8F%B0%E8%AE%BE%E5%A4%87%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T08:18:33.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      如何使用nginx在一台设备上部署多个前端项目
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>如果在 CentOS 系统上使用 Nginx 部署多个 Vue 前端项目，可以通过为每个项目配置不同的服务器块（server blocks）或使用不同的路径来实现。以下是详细的步骤：</p>
+<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><h4 id="a-更新系统软件包"><a href="#a-更新系统软件包" class="headerlink" title="a. 更新系统软件包"></a>a. 更新系统软件包</h4><p>首先，确保系统的软件包是最新的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum update -y</span><br></pre></td></tr></table></figure>
+
+<h4 id="b-安装-Nginx"><a href="#b-安装-Nginx" class="headerlink" title="b. 安装 Nginx"></a>b. 安装 Nginx</h4><p>如果尚未安装 Nginx，可以通过以下命令进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install epel-release -y</span><br><span class="line"><span class="built_in">sudo</span> yum install nginx -y</span><br></pre></td></tr></table></figure>
+
+<p>启动并设置 Nginx 开机自启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-编译-Vue-项目"><a href="#2-编译-Vue-项目" class="headerlink" title="2. 编译 Vue 项目"></a>2. 编译 Vue 项目</h3><p>假设你已经有多个 Vue 项目，例如 <code>project1</code> 和 <code>project2</code>。确保每个项目都已构建为生产环境的静态文件。</p>
+<p>进入每个项目目录，执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<p>构建完成后，通常会在 <code>dist</code> 目录下生成静态文件。将这些文件复制到服务器上的特定目录，例如：</p>
+<ul>
+<li><code>/var/www/project1</code></li>
+<li><code>/var/www/project2</code></li>
+</ul>
+<p>可以使用 <code>scp</code> 或其他方式将文件上传到服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r ./dist user@your_server_ip:/var/www/project1</span><br><span class="line">scp -r ./dist user@your_server_ip:/var/www/project2</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置-Nginx"><a href="#3-配置-Nginx" class="headerlink" title="3. 配置 Nginx"></a>3. 配置 Nginx</h3><p>有两种常见的方法来配置 Nginx 以部署多个 Vue 前端项目：</p>
+<ul>
+<li><strong>基于不同的域名或子域名</strong></li>
+<li><strong>基于不同的路径</strong></li>
+</ul>
+<p>以下分别介绍这两种方法的配置步骤。</p>
+<h4 id="方法一：基于不同的域名或子域名"><a href="#方法一：基于不同的域名或子域名" class="headerlink" title="方法一：基于不同的域名或子域名"></a>方法一：基于不同的域名或子域名</h4><p>假设你有两个子域名：</p>
+<ul>
+<li><code>app1.example.com</code> 指向 <code>project1</code></li>
+<li><code>app2.example.com</code> 指向 <code>project2</code></li>
+</ul>
+<h5 id="a-配置-DNS"><a href="#a-配置-DNS" class="headerlink" title="a. 配置 DNS"></a>a. 配置 DNS</h5><p>确保这两个子域名已经在 DNS 上解析到你的服务器 IP 地址。</p>
+<h5 id="b-创建-Nginx-服务器块"><a href="#b-创建-Nginx-服务器块" class="headerlink" title="b. 创建 Nginx 服务器块"></a>b. 创建 Nginx 服务器块</h5><p>在 <code>/etc/nginx/conf.d/</code> 目录下为每个项目创建单独的配置文件。</p>
+<p><strong>项目1：<code>project1.conf</code></strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> app1.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /var/www/project1;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：配置Gzip压缩，缓存等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>项目2：<code>project2.conf</code></strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> app2.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /var/www/project2;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：配置Gzip压缩，缓存等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="c-测试并重启-Nginx"><a href="#c-测试并重启-Nginx" class="headerlink" title="c. 测试并重启 Nginx"></a>c. 测试并重启 Nginx</h5><p>测试 Nginx 配置是否正确：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure>
+
+<p>如果输出显示配置文件语法正确，重启 Nginx 以应用更改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二：基于不同的路径"><a href="#方法二：基于不同的路径" class="headerlink" title="方法二：基于不同的路径"></a>方法二：基于不同的路径</h4><p>如果你希望通过不同的路径来访问不同的应用，例如：</p>
+<ul>
+<li><code>example.com/app1</code> 指向 <code>project1</code></li>
+<li><code>example.com/app2</code> 指向 <code>project2</code></li>
+</ul>
+<h5 id="a-创建-Nginx-服务器块"><a href="#a-创建-Nginx-服务器块" class="headerlink" title="a. 创建 Nginx 服务器块"></a>a. 创建 Nginx 服务器块</h5><p>编辑主 Nginx 配置文件或在 <code>/etc/nginx/conf.d/</code> 目录下创建一个新的配置文件，例如 <code>multi_vue.conf</code>。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 项目1</span></span><br><span class="line">    <span class="section">location</span> /app1/ &#123;</span><br><span class="line">        <span class="attribute">alias</span> /var/www/project1/;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /app1/index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 项目2</span></span><br><span class="line">    <span class="section">location</span> /app2/ &#123;</span><br><span class="line">        <span class="attribute">alias</span> /var/www/project2/;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /app2/index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 默认主页或其他处理</span></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">        <span class="attribute">index</span> index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：配置Gzip压缩，缓存等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>使用 <code>alias</code> 而不是 <code>root</code>，以确保正确映射路径。</li>
+<li>确保 Vue Router 的模式为 <code>history</code>，并且配置了 <code>try_files</code> 指令以处理路由。</li>
+</ul>
+<h5 id="b-测试并重启-Nginx"><a href="#b-测试并重启-Nginx" class="headerlink" title="b. 测试并重启 Nginx"></a>b. 测试并重启 Nginx</h5><p>同样，测试配置并重启 Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-配置防火墙"><a href="#4-配置防火墙" class="headerlink" title="4. 配置防火墙"></a>4. 配置防火墙</h3><p>确保防火墙允许 HTTP（80）和如果需要的话 HTTPS（443）流量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-配置-HTTPS（可选）"><a href="#5-配置-HTTPS（可选）" class="headerlink" title="5. 配置 HTTPS（可选）"></a>5. 配置 HTTPS（可选）</h3><p>为了提高安全性，建议为你的域名配置 SSL 证书。可以使用 <a target="_blank" rel="noopener" href="https://letsencrypt.org/">Let’s Encrypt</a> 提供的免费证书。</p>
+<h4 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install certbot python3-certbot-nginx -y</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取并配置证书"><a href="#获取并配置证书" class="headerlink" title="获取并配置证书"></a>获取并配置证书</h4><p>针对每个域名执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx -d app1.example.com</span><br><span class="line"><span class="built_in">sudo</span> certbot --nginx -d app2.example.com</span><br></pre></td></tr></table></figure>
+
+<p>按照提示完成证书申请和自动配置。</p>
+<p>如果你使用的是基于路径的配置，请为主域名申请证书：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx -d example.com</span><br></pre></td></tr></table></figure>
+
+<p>Certbot 会自动修改 Nginx 配置以启用 HTTPS。</p>
+<h3 id="6-优化-Nginx-配置（可选）"><a href="#6-优化-Nginx-配置（可选）" class="headerlink" title="6. 优化 Nginx 配置（可选）"></a>6. 优化 Nginx 配置（可选）</h3><p>为了提高性能和安全性，可以进行以下优化：</p>
+<h4 id="a-启用-Gzip-压缩"><a href="#a-启用-Gzip-压缩" class="headerlink" title="a. 启用 Gzip 压缩"></a>a. 启用 Gzip 压缩</h4><p>在 Nginx 配置的 <code>http</code> 块中添加：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line">    <span class="attribute">gzip_min_length</span> <span class="number">256</span>;</span><br><span class="line">    <span class="comment"># 其他配置...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="b-设置缓存头"><a href="#b-设置缓存头" class="headerlink" title="b. 设置缓存头"></a>b. 设置缓存头</h4><p>在各个 <code>location</code> 块中添加缓存头：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /app1/ &#123;</span><br><span class="line">    <span class="attribute">alias</span> /var/www/project1/;</span><br><span class="line">    <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /app1/index.html;</span><br><span class="line">    <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;public, max-age=31536000, immutable&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="c-限制访问权限"><a href="#c-限制访问权限" class="headerlink" title="c. 限制访问权限"></a>c. 限制访问权限</h4><p>根据需要，可以限制对某些文件类型的访问，或添加安全相关的头部信息。</p>
+<h3 id="7-验证部署"><a href="#7-验证部署" class="headerlink" title="7. 验证部署"></a>7. 验证部署</h3><p>完成上述步骤后，访问你的域名或路径，确认各个 Vue 应用是否正确加载。</p>
+<p>例如：</p>
+<ul>
+<li>访问 <code>http://app1.example.com</code> 或 <code>https://app1.example.com</code> 查看 <code>project1</code>。</li>
+<li>访问 <code>http://app2.example.com</code> 或 <code>https://app2.example.com</code> 查看 <code>project2</code>。</li>
+<li>如果基于路径，访问 <code>http://example.com/app1/</code> 和 <code>http://example.com/app2/</code>。</li>
+</ul>
+<h3 id="8-常见问题排查"><a href="#8-常见问题排查" class="headerlink" title="8. 常见问题排查"></a>8. 常见问题排查</h3><ul>
+<li><p><strong>404 错误或路由问题</strong>：确保 <code>try_files</code> 指令正确配置，并且 Vue Router 使用 <code>history</code> 模式时，Nginx 能够正确返回 <code>index.html</code>。</p>
+</li>
+<li><p><strong>权限问题</strong>：确保 Nginx 有权限读取 <code>/var/www/project1</code> 和 <code>/var/www/project2</code> 目录下的文件。可以调整文件夹权限或将文件所有者设置为 <code>nginx</code> 用户。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R nginx:nginx /var/www/project1</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R nginx:nginx /var/www/project2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>防火墙问题</strong>：确认防火墙已开放相应的端口（80 和 443）。</p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过以上步骤，你可以在 CentOS 系统上使用 Nginx 部署多个 Vue 前端项目。根据实际需求选择基于域名还是基于路径的部署方式，并根据需要进行进一步的优化和安全配置。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E5%9C%A8%E4%B8%80%E5%8F%B0%E8%AE%BE%E5%A4%87%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" data-id="cm1m7berh0006p4u60twefxoa" data-title="如何使用nginx在一台设备上部署多个前端项目" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          项目部署
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/09/24/%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%89%E8%A3%85%E5%8C%85%E5%90%8D%E7%A7%B0%E5%8C%B9%E9%85%8D%E5%90%88%E9%80%82%E7%9A%84%E8%AE%BE%E5%A4%872/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何根据安装包名称匹配合适的设备2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B1%BB%E5%88%AB/">类别</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deploy/" rel="tag">deploy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">open source</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/deploy/" style="font-size: 20px;">deploy</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/open-source/" style="font-size: 20px;">open source</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 10px;">反向代理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E5%85%B3%E4%BA%8EPromise/">关于Promise</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/">项目部署docker篇</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">项目部署</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

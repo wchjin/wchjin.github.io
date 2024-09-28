@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>项目部署 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="部署环境 centos 部署项目 前端nuxt3+vue 后端nestjs + mongoDB  在CentOS服务器上部署一个前后端分离的项目涉及多个步骤，包括环境准备、代码部署、构建与运行应用、配置数据库和反向代理等。以下是详细的步骤指南： 一、准备工作 确保你有CentOS服务器的访问权限，并且可以通过SSH进行连接。  确保服务器已更新： 1sudo yum update -y  配置防">
+<meta property="og:type" content="article">
+<meta property="og:title" content="项目部署">
+<meta property="og:url" content="http://example.com/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="部署环境 centos 部署项目 前端nuxt3+vue 后端nestjs + mongoDB  在CentOS服务器上部署一个前后端分离的项目涉及多个步骤，包括环境准备、代码部署、构建与运行应用、配置数据库和反向代理等。以下是详细的步骤指南： 一、准备工作 确保你有CentOS服务器的访问权限，并且可以通过SSH进行连接。  确保服务器已更新： 1sudo yum update -y  配置防">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-24T08:31:06.000Z">
+<meta property="article:modified_time" content="2024-09-28T13:41:21.726Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="deploy">
+<meta property="article:tag" content="centos">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-项目部署" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T08:31:06.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      项目部署
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>部署环境 centos</li>
+<li>部署项目 前端nuxt3+vue 后端nestjs + mongoDB</li>
+</ul>
+<p>在CentOS服务器上部署一个前后端分离的项目涉及多个步骤，包括环境准备、代码部署、构建与运行应用、配置数据库和反向代理等。以下是详细的步骤指南：</p>
+<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><ol>
+<li><p><strong>确保你有CentOS服务器的访问权限</strong>，并且可以通过SSH进行连接。</p>
+</li>
+<li><p><strong>确保服务器已更新</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum update -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置防火墙</strong>，确保必要的端口（如80、443、22）开放：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=ssh</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、安装必要的软件"><a href="#二、安装必要的软件" class="headerlink" title="二、安装必要的软件"></a>二、安装必要的软件</h2><h3 id="1-安装-Node-js-和-npm"><a href="#1-安装-Node-js-和-npm" class="headerlink" title="1. 安装 Node.js 和 npm"></a>1. 安装 Node.js 和 npm</h3><p>选择与你在Windows开发环境中使用的Node.js版本一致的版本。例如，假设使用的是Node.js 18：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_18.x | <span class="built_in">sudo</span> bash -</span><br><span class="line"><span class="built_in">sudo</span> yum install -y nodejs</span><br></pre></td></tr></table></figure>
+
+<p>验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装-MongoDB"><a href="#2-安装-MongoDB" class="headerlink" title="2. 安装 MongoDB"></a>2. 安装 MongoDB</h3><p>为CentOS安装MongoDB的步骤如下：</p>
+<ol>
+<li><p><strong>创建MongoDB的repo文件</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/yum.repos.d/mongodb-org-6.0.repo &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[mongodb-org-6.0]</span></span><br><span class="line"><span class="string">name=MongoDB Repository</span></span><br><span class="line"><span class="string">baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/6.0/x86_64/</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgkey=https://www.mongodb.org/static/pgp/server-6.0.asc</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装MongoDB</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y mongodb-org</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动并配置MongoDB为开机自启</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start mongod</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> mongod</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查MongoDB状态</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl status mongod</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-安装-Nginx"><a href="#3-安装-Nginx" class="headerlink" title="3. 安装 Nginx"></a>3. 安装 Nginx</h3><p>Nginx 将作为反向代理服务器，用于处理前端和后端的请求。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install -y nginx</span><br></pre></td></tr></table></figure>
+
+<p>启动并设置Nginx开机自启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure>
+
+<p>检查Nginx状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl status nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-安装-PM2（进程管理器）"><a href="#4-安装-PM2（进程管理器）" class="headerlink" title="4. 安装 PM2（进程管理器）"></a>4. 安装 PM2（进程管理器）</h3><p>PM2 用于管理Node.js应用的运行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> npm install -g pm2</span><br></pre></td></tr></table></figure>
+
+<p>验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、部署代码"><a href="#三、部署代码" class="headerlink" title="三、部署代码"></a>三、部署代码</h2><h3 id="1-将代码传输到服务器"><a href="#1-将代码传输到服务器" class="headerlink" title="1. 将代码传输到服务器"></a>1. 将代码传输到服务器</h3><p>有多种方法可以将代码从Windows传输到服务器，包括：</p>
+<ul>
+<li><strong>Git</strong>：建议将项目代码托管在Git仓库（如GitHub、GitLab），然后在服务器上克隆。</li>
+<li><strong>SCP 或 SFTP</strong>：使用工具如 WinSCP 手动上传文件。</li>
+<li><strong>使用 Git</strong>举例：</li>
+</ul>
+<p>假设你已经将前端和后端代码分别托管在不同的仓库中。</p>
+<p>在服务器上，选择一个合适的目录（如 <code>/var/www</code>）存放项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/www/myproject</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> $(<span class="built_in">whoami</span>):$(<span class="built_in">whoami</span>) /var/www/myproject</span><br><span class="line"><span class="built_in">cd</span> /var/www/myproject</span><br></pre></td></tr></table></figure>
+
+<p>克隆前端和后端项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆前端项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yourusername/your-frontend-repo.git frontend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆后端项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yourusername/your-backend-repo.git backend</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装依赖并构建前端"><a href="#2-安装依赖并构建前端" class="headerlink" title="2. 安装依赖并构建前端"></a>2. 安装依赖并构建前端</h3><p>进入前端目录，安装依赖并进行构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/frontend</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用环境变量，确保在根目录创建 .env 文件或根据需要配置</span></span><br><span class="line"><span class="comment"># 构建前端项目（具体命令可能根据项目配置不同而不同）</span></span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-安装依赖并启动后端"><a href="#3-安装依赖并启动后端" class="headerlink" title="3. 安装依赖并启动后端"></a>3. 安装依赖并启动后端</h3><p>进入后端目录，安装依赖并启动NestJS应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/backend</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建NestJS应用（如果使用编译）</span></span><br><span class="line">npm run build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 PM2 启动应用</span></span><br><span class="line">pm2 start dist/main.js --name backend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存 PM2 进程列表，以便重启后自动启动</span></span><br><span class="line">pm2 save</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-配置-PM2-开机自启"><a href="#4-配置-PM2-开机自启" class="headerlink" title="4. 配置 PM2 开机自启"></a>4. 配置 PM2 开机自启</h3><p>设置 PM2 开机自动启动进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 startup systemd</span><br></pre></td></tr></table></figure>
+
+<p>根据提示复制并运行生成的命令。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">env</span> PATH=<span class="variable">$PATH</span>:/usr/bin pm2 startup systemd -u yourusername --hp /home/yourusername</span><br></pre></td></tr></table></figure>
+
+<p>然后，保存当前的 PM2 进程列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 save</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、配置-Nginx-作为反向代理"><a href="#四、配置-Nginx-作为反向代理" class="headerlink" title="四、配置 Nginx 作为反向代理"></a>四、配置 Nginx 作为反向代理</h2><p>假设你的前端项目已经构建，并且输出到 <code>dist</code> 目录或通过PM2运行。这里假设前端通过Nginx直接提供静态文件，后端通过Nginx进行代理。</p>
+<h3 id="1-配置-Nginx"><a href="#1-配置-Nginx" class="headerlink" title="1. 配置 Nginx"></a>1. 配置 Nginx</h3><p>编辑 Nginx 配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vi /etc/nginx/conf.d/myproject.conf</span><br></pre></td></tr></table></figure>
+
+<p>示例配置（请根据实际情况调整）：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> yourdomain.com; <span class="comment"># 替换为你的域名或服务器IP</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 前端静态文件</span></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span> /var/www/myproject/frontend/.output/public; <span class="comment"># 根据Nuxt构建输出的位置调整</span></span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 后端API代理</span></span><br><span class="line">    <span class="section">location</span> /api/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:3000/; <span class="comment"># 假设后端NestJS运行在3000端口</span></span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&#x27;upgrade&#x27;</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_cache_bypass</span> <span class="variable">$http_upgrade</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：处理WebSocket</span></span><br><span class="line">    <span class="section">location</span> /socket.io/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:3000/socket.io/;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;Upgrade&quot;</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li>确保前端构建输出路径正确。如果使用Nuxt 3，可以参考 <a target="_blank" rel="noopener" href="https://v3.nuxtjs.org/docs/deployment/hosting-vps-netlify-vercel">Nuxt 3 部署指南</a>。</li>
+<li>确保后端API的路径前缀（如 <code>/api/</code>）与前端请求一致。</li>
+</ul>
+<h3 id="2-测试-Nginx-配置并重启"><a href="#2-测试-Nginx-配置并重启" class="headerlink" title="2. 测试 Nginx 配置并重启"></a>2. 测试 Nginx 配置并重启</h3><p>测试配置是否有语法错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure>
+
+<p>如果输出 <code>syntax is ok</code> 和 <code>test is successful</code>，则重启Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置防火墙以允许HTTP和HTTPS流量"><a href="#3-配置防火墙以允许HTTP和HTTPS流量" class="headerlink" title="3. 配置防火墙以允许HTTP和HTTPS流量"></a>3. 配置防火墙以允许HTTP和HTTPS流量</h3><p>已在准备工作中进行了，但再次确认：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、配置环境变量"><a href="#五、配置环境变量" class="headerlink" title="五、配置环境变量"></a>五、配置环境变量</h2><p>确保前后端项目在服务器上使用正确的环境变量。</p>
+<h3 id="1-后端（NestJS）"><a href="#1-后端（NestJS）" class="headerlink" title="1. 后端（NestJS）"></a>1. 后端（NestJS）</h3><p>编辑后端项目的 <code>.env</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/backend</span><br><span class="line">vi .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p>设置必要的环境变量，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PORT=3000</span><br><span class="line">MONGO_URI=mongodb://localhost:27017/yourdbname</span><br><span class="line"># 其他环境变量</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-前端（Nuxt-Vue3）"><a href="#2-前端（Nuxt-Vue3）" class="headerlink" title="2. 前端（Nuxt + Vue3）"></a>2. 前端（Nuxt + Vue3）</h3><p>根据项目需求，编辑前端的环境变量文件（如 <code>.env</code> 或 <code>.env.production</code>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/frontend</span><br><span class="line">vi .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p>设置必要的环境变量，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">API_BASE_URL=/api</span><br><span class="line"># 其他环境变量</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：确保在构建前设置这些环境变量，或者通过运行时配置来处理。</p>
+<h2 id="六、域名和SSL配置（可选）"><a href="#六、域名和SSL配置（可选）" class="headerlink" title="六、域名和SSL配置（可选）"></a>六、域名和SSL配置（可选）</h2><h3 id="1-指向域名"><a href="#1-指向域名" class="headerlink" title="1. 指向域名"></a>1. 指向域名</h3><p>确保你的域名指向CentOS服务器的IP地址，通常在域名注册商的管理面板中配置A记录。</p>
+<h3 id="2-安装-Certbot-并获取SSL证书"><a href="#2-安装-Certbot-并获取SSL证书" class="headerlink" title="2. 安装 Certbot 并获取SSL证书"></a>2. 安装 Certbot 并获取SSL证书</h3><p>使用 Let’s Encrypt 提供免费SSL证书。</p>
+<h4 id="安装-EPEL-和-Certbot"><a href="#安装-EPEL-和-Certbot" class="headerlink" title="安装 EPEL 和 Certbot"></a>安装 EPEL 和 Certbot</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install -y certbot python3-certbot-nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取和安装SSL证书"><a href="#获取和安装SSL证书" class="headerlink" title="获取和安装SSL证书"></a>获取和安装SSL证书</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx -d yourdomain.com -d www.yourdomain.com</span><br></pre></td></tr></table></figure>
+
+<p>按照提示完成认证过程。Certbot会自动配置Nginx以使用SSL。</p>
+<h4 id="自动续期"><a href="#自动续期" class="headerlink" title="自动续期"></a>自动续期</h4><p>Certbot会自动添加一个cron任务来续期证书。你可以手动测试续期：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot renew --dry-run</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、优化与安全"><a href="#七、优化与安全" class="headerlink" title="七、优化与安全"></a>七、优化与安全</h2><h3 id="1-设置UFW（可选）"><a href="#1-设置UFW（可选）" class="headerlink" title="1. 设置UFW（可选）"></a>1. 设置UFW（可选）</h3><p>CentOS默认使用 firewalld，已经在前面配置过。如果你更习惯使用 UFW，可以安装并配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install -y ufw</span><br><span class="line"><span class="built_in">sudo</span> systemctl start ufw</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> ufw</span><br></pre></td></tr></table></figure>
+
+<p>配置规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw allow OpenSSH</span><br><span class="line"><span class="built_in">sudo</span> ufw allow <span class="string">&#x27;Nginx Full&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> ufw <span class="built_in">enable</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-配置-SELinux（如果启用）"><a href="#2-配置-SELinux（如果启用）" class="headerlink" title="2. 配置 SELinux（如果启用）"></a>2. 配置 SELinux（如果启用）</h3><p>如果 SELinux 启用，确保它允许 Nginx 访问相关目录和端口。</p>
+<p>检查SELinux状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sestatus</span><br></pre></td></tr></table></figure>
+
+<p>如果需要，可以调整策略。例如，允许 Nginx 访问网络：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setsebool -P httpd_can_network_connect on</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-设置日志轮转"><a href="#3-设置日志轮转" class="headerlink" title="3. 设置日志轮转"></a>3. 设置日志轮转</h3><p>确保日志不会占满磁盘。默认情况下，Nginx 和 PM2 已有日志轮转配置，但可以进一步优化。</p>
+<h3 id="4-性能优化"><a href="#4-性能优化" class="headerlink" title="4. 性能优化"></a>4. 性能优化</h3><ul>
+<li><p><strong>使用 CDN</strong>：为前端静态资源配置CDN以提高加载速度。</p>
+</li>
+<li><p><strong>启用Gzip压缩</strong>：在Nginx配置中启用Gzip：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain application/xml;</span><br><span class="line">    <span class="comment"># 其他配置...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>缓存策略</strong>：根据需求配置Nginx的缓存策略。</p>
+</li>
+</ul>
+<h2 id="八、测试部署"><a href="#八、测试部署" class="headerlink" title="八、测试部署"></a>八、测试部署</h2><ol>
+<li><p><strong>访问网站</strong>：在浏览器中访问 <code>http://yourdomain.com</code> 或 <code>https://yourdomain.com</code>，确保前端正常加载。</p>
+</li>
+<li><p><strong>测试API</strong>：确保前端能够成功与后端API进行通信。</p>
+</li>
+<li><p><strong>检查看日志</strong>：</p>
+<ul>
+<li><p>Nginx日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/nginx/access.log /var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PM2日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs backend</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MongoDB日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/mongodb/mongod.log</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="九、常见问题排查"><a href="#九、常见问题排查" class="headerlink" title="九、常见问题排查"></a>九、常见问题排查</h2><ol>
+<li><strong>端口被占用</strong>：确保后端NestJS应用监听的端口（如3000）未被其他服务占用。</li>
+<li><strong>防火墙问题</strong>：确认所有必要的端口已开放，尤其是在配置SSL后可能需要开放443端口。</li>
+<li><strong>权限问题</strong>：确保Nginx有权限访问前端构建输出的目录，以及后端应用有权限读取配置文件和环境变量。</li>
+<li><strong>日志检查</strong>：通过查看Nginx、PM2和MongoDB的日志来排查问题。</li>
+</ol>
+<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><p>通过以上步骤，你应该能够在CentOS服务器上成功部署一个前后端分离的项目，其中前端使用Nuxt + Vue3，后端使用NestJS，并连接MongoDB数据库。以下是关键点回顾：</p>
+<ol>
+<li><strong>环境准备</strong>：安装Node.js、MongoDB和Nginx。</li>
+<li><strong>代码部署</strong>：将前后端代码传输到服务器，安装依赖，构建前端，启动后端。</li>
+<li><strong>反向代理配置</strong>：使用Nginx处理静态文件和API请求。</li>
+<li><strong>安全配置</strong>：设置SSL证书，配置防火墙和SELinux。</li>
+<li><strong>优化与测试</strong>：确保应用性能和安全，以及通过日志进行监控。</li>
+</ol>
+<p>根据具体项目需求，可能需要进一步调整配置或添加额外的功能，如负载均衡、缓存优化等。确保定期备份关键数据，特别是MongoDB数据库，以防数据丢失。</p>
+<p>如有任何进一步的问题，欢迎随时提问！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" data-id="cm1m7berj000ap4u6f13rbyjs" data-title="项目部署" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deploy/" rel="tag">deploy</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          项目部署docker篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/09/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E5%9C%A8%E4%B8%80%E5%8F%B0%E8%AE%BE%E5%A4%87%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何使用nginx在一台设备上部署多个前端项目</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B1%BB%E5%88%AB/">类别</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deploy/" rel="tag">deploy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">open source</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/deploy/" style="font-size: 20px;">deploy</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/open-source/" style="font-size: 20px;">open source</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 10px;">反向代理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E5%85%B3%E4%BA%8EPromise/">关于Promise</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/">项目部署docker篇</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">项目部署</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

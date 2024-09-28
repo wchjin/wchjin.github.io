@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>test | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="以下是一个基本的 Nginx 配置文件示例和说明。 基本的 Nginx 配置文件示例1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677# nginx.conf#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="test">
+<meta property="og:url" content="http://example.com/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="以下是一个基本的 Nginx 配置文件示例和说明。 基本的 Nginx 配置文件示例1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677# nginx.conf#">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-25T16:10:58.000Z">
+<meta property="article:modified_time" content="2024-09-28T13:39:46.714Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="nginx">
+<meta property="article:tag" content="反向代理">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-nginx配置文件学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2024-09-25T16:10:58.000Z" itemprop="datePublished">2024-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      test
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>以下是一个基本的 Nginx 配置文件示例和说明。</p>
+<h3 id="基本的-Nginx-配置文件示例"><a href="#基本的-Nginx-配置文件示例" class="headerlink" title="基本的 Nginx 配置文件示例"></a>基本的 Nginx 配置文件示例</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nginx.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局块：设置Nginx的全局配置</span></span><br><span class="line"><span class="attribute">user</span> www-data;  <span class="comment"># 运行Nginx的用户</span></span><br><span class="line"><span class="attribute">worker_processes</span> auto;  <span class="comment"># 根据CPU核心数自动设置工作进程数</span></span><br><span class="line"><span class="attribute">pid</span> /run/nginx.pid;  <span class="comment"># 存储主进程的PID文件</span></span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span> <span class="number">1024</span>;  <span class="comment"># 每个工作进程允许的最大连接数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="comment"># 基本设置</span></span><br><span class="line">    <span class="attribute">include</span>       mime.types;  <span class="comment"># 包含MIME类型文件</span></span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;  <span class="comment"># 启用高效文件传输</span></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;  <span class="comment"># 设置保持活动连接的超时时间（秒）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 日志设置</span></span><br><span class="line">    <span class="attribute">access_log</span> /var/log/nginx/access.log;</span><br><span class="line">    <span class="attribute">error_log</span> /var/log/nginx/<span class="literal">error</span>.log;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Gzip压缩</span></span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 虚拟主机配置</span></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span>;  <span class="comment"># 监听80端口（HTTP）</span></span><br><span class="line">        <span class="attribute">server_name</span> example.com www.example.com;  <span class="comment"># 绑定的域名</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 网站根目录</span></span><br><span class="line">        <span class="attribute">root</span> /var/www/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 默认首页文件</span></span><br><span class="line">        <span class="attribute">index</span> index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 处理根路径请求</span></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 静态文件缓存配置（可选）</span></span><br><span class="line">        <span class="section">location</span> <span class="regexp">~* \.(jpg|jpeg|png|gif|ico|css|js)$</span> &#123;</span><br><span class="line">            <span class="attribute">expires</span> <span class="number">30d</span>;</span><br><span class="line">            <span class="attribute">access_log</span> <span class="literal">off</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 错误页面设置（可选）</span></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">        <span class="section">location</span> = /<span class="number">404</span>.html &#123;</span><br><span class="line">            internal;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">        <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">            internal;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># SSL虚拟主机示例（可选）</span></span><br><span class="line">    <span class="comment"># server &#123;</span></span><br><span class="line">    <span class="comment">#     listen 443 ssl;</span></span><br><span class="line">    <span class="comment">#     server_name example.com;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#     ssl_certificate /etc/ssl/certs/example.com.crt;</span></span><br><span class="line">    <span class="comment">#     ssl_certificate_key /etc/ssl/private/example.com.key;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#     root /var/www/html;</span></span><br><span class="line">    <span class="comment">#     index index.html;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#     location / &#123;</span></span><br><span class="line">    <span class="comment">#         try_files $uri $uri/ =404;</span></span><br><span class="line">    <span class="comment">#     &#125;</span></span><br><span class="line">    <span class="comment"># &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置文件说明"><a href="#配置文件说明" class="headerlink" title="配置文件说明"></a>配置文件说明</h3><ol>
+<li><p><strong>全局块</strong></p>
+<ul>
+<li><code>user www-data;</code>: 指定Nginx进程运行的用户，通常是<code>www-data</code>或<code>nginx</code>。</li>
+<li><code>worker_processes auto;</code>: 设置Nginx工作进程的数量，<code>auto</code>表示根据CPU核心数自动调整。</li>
+<li><code>pid /run/nginx.pid;</code>: 指定Nginx主进程的PID文件路径。</li>
+</ul>
+</li>
+<li><p><strong>events 块</strong></p>
+<ul>
+<li><code>worker_connections 1024;</code>: 每个工作进程允许的最大连接数。总连接数为 <code>worker_processes * worker_connections</code>。</li>
+</ul>
+</li>
+<li><p><strong>http 块</strong></p>
+<ul>
+<li><p><strong>基本设置</strong></p>
+<ul>
+<li><code>include mime.types;</code>: 加载MIME类型定义，确保不同类型的文件被正确识别和处理。</li>
+<li><code>default_type application/octet-stream;</code>: 默认的MIME类型。</li>
+<li><code>sendfile on;</code>: 启用高效文件传输方式。</li>
+<li><code>keepalive_timeout 65;</code>: 设置保持活动连接的超时时间，单位为秒。</li>
+</ul>
+</li>
+<li><p><strong>日志设置</strong></p>
+<ul>
+<li><code>access_log /var/log/nginx/access.log;</code>: 访问日志文件路径。</li>
+<li><code>error_log /var/log/nginx/error.log;</code>: 错误日志文件路径。</li>
+</ul>
+</li>
+<li><p><strong>Gzip 压缩</strong></p>
+<ul>
+<li><code>gzip on;</code>: 启用Gzip压缩，提高传输效率。</li>
+<li><code>gzip_types ...;</code>: 指定哪些MIME类型的响应进行压缩。</li>
+</ul>
+</li>
+<li><p><strong>虚拟主机(server 块)</strong></p>
+<ul>
+<li><code>listen 80;</code>: 监听80端口，用于HTTP请求。</li>
+<li><code>server_name example.com www.example.com;</code>: 绑定的域名。</li>
+<li><code>root /var/www/html;</code>: 网站的根目录。</li>
+<li><code>index ...;</code>: 默认的首页文件列表。</li>
+<li><code>location / &#123; ... &#125;</code>: 处理根路径的请求，<code>try_files</code>指令用于尝试按照顺序查找文件，如果找不到则返回404错误。</li>
+<li><code>location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ &#123; ... &#125;</code>: 针对静态文件设置缓存策略，<code>expires 30d;</code>表示缓存30天。</li>
+<li><code>error_page ...;</code>: 自定义错误页面。</li>
+</ul>
+</li>
+<li><p><strong>SSL 虚拟主机（可选）</strong></p>
+<ul>
+<li>注释部分展示了如何配置HTTPS，包括SSL证书和密钥。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="快速步骤：使用该配置"><a href="#快速步骤：使用该配置" class="headerlink" title="快速步骤：使用该配置"></a>快速步骤：使用该配置</h3><ol>
+<li><p><strong>安装 Nginx</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置网站根目录</strong><br> 将你的网站文件放在 <code>/var/www/html</code> 目录下，或者根据需要修改 <code>root</code> 指令。</p>
+</li>
+<li><p><strong>测试配置文件</strong><br> 在修改配置文件后，使用以下命令测试配置是否有误：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重新加载 Nginx</strong><br> 如果配置文件没有错误，重新加载Nginx以应用更改：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="进一步学习资源"><a href="#进一步学习资源" class="headerlink" title="进一步学习资源"></a>进一步学习资源</h3><ul>
+<li><strong>官方文档</strong>: <a target="_blank" rel="noopener" href="https://nginx.org/en/docs/">Nginx 官方文档</a></li>
+<li><strong>教程网站</strong>:<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/nginx-install-setup.html">菜鸟教程 - Nginx教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tags/nginx">DigitalOcean 的 Nginx 教程</a></li>
+</ul>
+</li>
+<li><strong>书籍推荐</strong>:<ul>
+<li>《Nginx 高性能 Web 服务器详解》</li>
+<li>《Nginx 实战》</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/" data-id="cm1m7berd0001p4u6a19hea5b" data-title="test" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/09/24/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B1%BB%E5%88%AB/">类别</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deploy/" rel="tag">deploy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">open source</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/deploy/" style="font-size: 20px;">deploy</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/open-source/" style="font-size: 20px;">open source</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 10px;">反向代理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">September 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/">test</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E5%85%B3%E4%BA%8EPromise/">关于Promise</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/">项目部署docker篇</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">项目部署</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

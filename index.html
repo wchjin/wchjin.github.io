@@ -69,10 +69,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-test" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-nginx配置文件学习" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2024/09/25/test/" class="article-date">
-  <time class="dt-published" datetime="2024-09-24T16:07:58.000Z" itemprop="datePublished">2024-09-25</time>
+    <a href="/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/" class="article-date">
+  <time class="dt-published" datetime="2024-09-25T16:10:58.000Z" itemprop="datePublished">2024-09-26</time>
 </a>
     
   </div>
@@ -83,7 +83,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/09/25/test/">test</a>
+      <a class="p-name article-title" href="/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/">test</a>
     </h1>
   
 
@@ -91,18 +91,98 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="xxx"><a href="#xxx" class="headerlink" title="xxx"></a>xxx</h1><ul>
-<li>yyy</li>
-<li>zzz</li>
+        <p>以下是一个基本的 Nginx 配置文件示例和说明。</p>
+<h3 id="基本的-Nginx-配置文件示例"><a href="#基本的-Nginx-配置文件示例" class="headerlink" title="基本的 Nginx 配置文件示例"></a>基本的 Nginx 配置文件示例</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nginx.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 全局块：设置Nginx的全局配置</span></span><br><span class="line"><span class="attribute">user</span> www-data;  <span class="comment"># 运行Nginx的用户</span></span><br><span class="line"><span class="attribute">worker_processes</span> auto;  <span class="comment"># 根据CPU核心数自动设置工作进程数</span></span><br><span class="line"><span class="attribute">pid</span> /run/nginx.pid;  <span class="comment"># 存储主进程的PID文件</span></span><br><span class="line"></span><br><span class="line"><span class="section">events</span> &#123;</span><br><span class="line">    <span class="attribute">worker_connections</span> <span class="number">1024</span>;  <span class="comment"># 每个工作进程允许的最大连接数</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="comment"># 基本设置</span></span><br><span class="line">    <span class="attribute">include</span>       mime.types;  <span class="comment"># 包含MIME类型文件</span></span><br><span class="line">    <span class="attribute">default_type</span>  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">sendfile</span>        <span class="literal">on</span>;  <span class="comment"># 启用高效文件传输</span></span><br><span class="line">    <span class="attribute">keepalive_timeout</span>  <span class="number">65</span>;  <span class="comment"># 设置保持活动连接的超时时间（秒）</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 日志设置</span></span><br><span class="line">    <span class="attribute">access_log</span> /var/log/nginx/access.log;</span><br><span class="line">    <span class="attribute">error_log</span> /var/log/nginx/<span class="literal">error</span>.log;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Gzip压缩</span></span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 虚拟主机配置</span></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span>;  <span class="comment"># 监听80端口（HTTP）</span></span><br><span class="line">        <span class="attribute">server_name</span> example.com www.example.com;  <span class="comment"># 绑定的域名</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 网站根目录</span></span><br><span class="line">        <span class="attribute">root</span> /var/www/html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 默认首页文件</span></span><br><span class="line">        <span class="attribute">index</span> index.html index.htm index.nginx-debian.html;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 处理根路径请求</span></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ =<span class="number">404</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 静态文件缓存配置（可选）</span></span><br><span class="line">        <span class="section">location</span> <span class="regexp">~* \.(jpg|jpeg|png|gif|ico|css|js)$</span> &#123;</span><br><span class="line">            <span class="attribute">expires</span> <span class="number">30d</span>;</span><br><span class="line">            <span class="attribute">access_log</span> <span class="literal">off</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 错误页面设置（可选）</span></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">404</span> /<span class="number">404</span>.html;</span><br><span class="line">        <span class="section">location</span> = /<span class="number">404</span>.html &#123;</span><br><span class="line">            internal;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">error_page</span> <span class="number">500</span> <span class="number">502</span> <span class="number">503</span> <span class="number">504</span> /50x.html;</span><br><span class="line">        <span class="section">location</span> = /50x.html &#123;</span><br><span class="line">            internal;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># SSL虚拟主机示例（可选）</span></span><br><span class="line">    <span class="comment"># server &#123;</span></span><br><span class="line">    <span class="comment">#     listen 443 ssl;</span></span><br><span class="line">    <span class="comment">#     server_name example.com;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#     ssl_certificate /etc/ssl/certs/example.com.crt;</span></span><br><span class="line">    <span class="comment">#     ssl_certificate_key /etc/ssl/private/example.com.key;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#     root /var/www/html;</span></span><br><span class="line">    <span class="comment">#     index index.html;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#     location / &#123;</span></span><br><span class="line">    <span class="comment">#         try_files $uri $uri/ =404;</span></span><br><span class="line">    <span class="comment">#     &#125;</span></span><br><span class="line">    <span class="comment"># &#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置文件说明"><a href="#配置文件说明" class="headerlink" title="配置文件说明"></a>配置文件说明</h3><ol>
+<li><p><strong>全局块</strong></p>
+<ul>
+<li><code>user www-data;</code>: 指定Nginx进程运行的用户，通常是<code>www-data</code>或<code>nginx</code>。</li>
+<li><code>worker_processes auto;</code>: 设置Nginx工作进程的数量，<code>auto</code>表示根据CPU核心数自动调整。</li>
+<li><code>pid /run/nginx.pid;</code>: 指定Nginx主进程的PID文件路径。</li>
+</ul>
+</li>
+<li><p><strong>events 块</strong></p>
+<ul>
+<li><code>worker_connections 1024;</code>: 每个工作进程允许的最大连接数。总连接数为 <code>worker_processes * worker_connections</code>。</li>
+</ul>
+</li>
+<li><p><strong>http 块</strong></p>
+<ul>
+<li><p><strong>基本设置</strong></p>
+<ul>
+<li><code>include mime.types;</code>: 加载MIME类型定义，确保不同类型的文件被正确识别和处理。</li>
+<li><code>default_type application/octet-stream;</code>: 默认的MIME类型。</li>
+<li><code>sendfile on;</code>: 启用高效文件传输方式。</li>
+<li><code>keepalive_timeout 65;</code>: 设置保持活动连接的超时时间，单位为秒。</li>
+</ul>
+</li>
+<li><p><strong>日志设置</strong></p>
+<ul>
+<li><code>access_log /var/log/nginx/access.log;</code>: 访问日志文件路径。</li>
+<li><code>error_log /var/log/nginx/error.log;</code>: 错误日志文件路径。</li>
+</ul>
+</li>
+<li><p><strong>Gzip 压缩</strong></p>
+<ul>
+<li><code>gzip on;</code>: 启用Gzip压缩，提高传输效率。</li>
+<li><code>gzip_types ...;</code>: 指定哪些MIME类型的响应进行压缩。</li>
+</ul>
+</li>
+<li><p><strong>虚拟主机(server 块)</strong></p>
+<ul>
+<li><code>listen 80;</code>: 监听80端口，用于HTTP请求。</li>
+<li><code>server_name example.com www.example.com;</code>: 绑定的域名。</li>
+<li><code>root /var/www/html;</code>: 网站的根目录。</li>
+<li><code>index ...;</code>: 默认的首页文件列表。</li>
+<li><code>location / &#123; ... &#125;</code>: 处理根路径的请求，<code>try_files</code>指令用于尝试按照顺序查找文件，如果找不到则返回404错误。</li>
+<li><code>location ~* \.(jpg|jpeg|png|gif|ico|css|js)$ &#123; ... &#125;</code>: 针对静态文件设置缓存策略，<code>expires 30d;</code>表示缓存30天。</li>
+<li><code>error_page ...;</code>: 自定义错误页面。</li>
+</ul>
+</li>
+<li><p><strong>SSL 虚拟主机（可选）</strong></p>
+<ul>
+<li>注释部分展示了如何配置HTTPS，包括SSL证书和密钥。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="快速步骤：使用该配置"><a href="#快速步骤：使用该配置" class="headerlink" title="快速步骤：使用该配置"></a>快速步骤：使用该配置</h3><ol>
+<li><p><strong>安装 Nginx</strong></p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置网站根目录</strong><br> 将你的网站文件放在 <code>/var/www/html</code> 目录下，或者根据需要修改 <code>root</code> 指令。</p>
+</li>
+<li><p><strong>测试配置文件</strong><br> 在修改配置文件后，使用以下命令测试配置是否有误：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重新加载 Nginx</strong><br> 如果配置文件没有错误，重新加载Nginx以应用更改：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="进一步学习资源"><a href="#进一步学习资源" class="headerlink" title="进一步学习资源"></a>进一步学习资源</h3><ul>
+<li><strong>官方文档</strong>: <a target="_blank" rel="noopener" href="https://nginx.org/en/docs/">Nginx 官方文档</a></li>
+<li><strong>教程网站</strong>:<ul>
+<li><a target="_blank" rel="noopener" href="https://www.runoob.com/linux/nginx-install-setup.html">菜鸟教程 - Nginx教程</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.digitalocean.com/community/tags/nginx">DigitalOcean 的 Nginx 教程</a></li>
+</ul>
+</li>
+<li><strong>书籍推荐</strong>:<ul>
+<li>《Nginx 高性能 Web 服务器详解》</li>
+<li>《Nginx 实战》</li>
+</ul>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/09/25/test/" data-id="cm1gogktm000134u68zgocg8x" data-title="test" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/" data-id="cm1m7berd0001p4u6a19hea5b" data-title="test" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li></ul>
+
     </footer>
   </div>
   
@@ -150,10 +230,1036 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/09/24/hello-world/" data-id="cm1gogktg000034u602kehyib" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2024/09/24/hello-world/" data-id="cm1m7ber90000p4u6eyhb2zt7" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-关于Promise" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E5%85%B3%E4%BA%8EPromise/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T09:39:49.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%B1%BB%E5%88%AB/">类别</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/24/%E5%85%B3%E4%BA%8EPromise/">关于Promise</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>深入理解 JavaScript 中的 Promise 对于编写高效、可维护的异步代码至关重要。以下是关于 Promise 的详尽讲解，涵盖其定义、工作原理、使用方法以及常见模式和陷阱。</p>
+<h2 id="1-什么是-Promise"><a href="#1-什么是-Promise" class="headerlink" title="1. 什么是 Promise"></a>1. 什么是 Promise</h2><p><strong>Promise</strong> 是 JavaScript 中用于处理异步操作的一种对象。它代表了一个在未来某个时间可能会完成（resolved）或失败（rejected）的操作，并允许你对该结果进行处理。</p>
+<p><strong>核心特点：</strong></p>
+<ul>
+<li><strong>异步操作的结果</strong>：Promise 对象表示一个尚未完成但最终会完成的操作。</li>
+<li><strong>链式调用</strong>：通过 <code>then</code>、<code>catch</code> 等方法，可以轻松地链接多个异步操作。</li>
+<li><strong>状态管理</strong>：Promise 有三种状态：<code>pending</code>（待定）、<code>fulfilled</code>（已完成）、<code>rejected</code>（已拒绝）。</li>
+</ul>
+<h2 id="2-Promise-的状态"><a href="#2-Promise-的状态" class="headerlink" title="2. Promise 的状态"></a>2. Promise 的状态</h2><p>一个 Promise 实例有以下三种状态：</p>
+<ol>
+<li><strong>Pending（待定）</strong>：初始状态，既不是成功，也不是失败。</li>
+<li><strong>Fulfilled（已完成）</strong>：操作成功完成。</li>
+<li><strong>Rejected（已拒绝）</strong>：操作失败。</li>
+</ol>
+<p>状态的转换是单向的，即只能从 <code>pending</code> 变为 <code>fulfilled</code> 或 <code>rejected</code>，一旦状态改变，就不会再变。</p>
+<h2 id="3-如何创建-Promise"><a href="#3-如何创建-Promise" class="headerlink" title="3. 如何创建 Promise"></a>3. 如何创建 Promise</h2><p>要创建一个 Promise，可以使用 <code>new Promise</code> 构造函数，传入一个执行器（executor）函数，该函数接收两个参数：<code>resolve</code> 和 <code>reject</code>，用于分别将 Promise 状态从 <code>pending</code> 转为 <code>fulfilled</code> 或 <code>rejected</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myPromise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 异步操作</span></span><br><span class="line">  <span class="keyword">const</span> success = <span class="literal">true</span>; <span class="comment">// 模拟操作结果</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (success) &#123;</span><br><span class="line">    <span class="title function_">resolve</span>(<span class="string">&#x27;操作成功&#x27;</span>);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="title function_">reject</span>(<span class="string">&#x27;操作失败&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Promise-的-then、-catch-和-finally-方法"><a href="#4-Promise-的-then、-catch-和-finally-方法" class="headerlink" title="4. Promise 的 .then、.catch 和 .finally 方法"></a>4. Promise 的 .then、.catch 和 .finally 方法</h2><h3 id="then-onFulfilled-onRejected"><a href="#then-onFulfilled-onRejected" class="headerlink" title=".then(onFulfilled, onRejected)"></a><code>.then(onFulfilled, onRejected)</code></h3><p>用于注册当 Promise 状态变为 <code>fulfilled</code> 或 <code>rejected</code> 时的回调函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">myPromise.<span class="title function_">then</span>(</span><br><span class="line">  <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;成功:&#x27;</span>, value);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;失败:&#x27;</span>, error);</span><br><span class="line">  &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>通常情况下，推荐使用 <code>.then</code> 处理成功，使用 <code>.catch</code> 处理失败：</p>
+<h3 id="catch-onRejected"><a href="#catch-onRejected" class="headerlink" title=".catch(onRejected)"></a><code>.catch(onRejected)</code></h3><p>用于注册当 Promise 被拒绝时的回调函数。它实际上是 <code>.then(null, onRejected)</code> 的语法糖。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">myPromise</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;成功:&#x27;</span>, value);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;失败:&#x27;</span>, error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="finally-onFinally"><a href="#finally-onFinally" class="headerlink" title=".finally(onFinally)"></a><code>.finally(onFinally)</code></h3><p>无论 Promise 最终状态如何，都会执行 <code>onFinally</code> 回调。常用于清理资源或最终步骤。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">myPromise</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;成功:&#x27;</span>, value);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;失败:&#x27;</span>, error);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">finally</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;操作完成&#x27;</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Promise-链"><a href="#5-Promise-链" class="headerlink" title="5. Promise 链"></a>5. Promise 链</h2><p>Promise 支持链式调用，每个 <code>.then</code> 返回一个新的 Promise，这使得多个异步操作可以按照顺序执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">resolve</span>(<span class="number">1</span>), <span class="number">1000</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">return</span> result * <span class="number">2</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 2</span></span><br><span class="line">    <span class="keyword">return</span> result * <span class="number">3</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 6</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在上述代码中，每个 <code>.then</code> 都接收前一个 Promise 的结果并返回一个新的值，传递给下一个 <code>.then</code>。</p>
+<h2 id="6-错误处理"><a href="#6-错误处理" class="headerlink" title="6. 错误处理"></a>6. 错误处理</h2><p>在 Promise 链中，如果某个步骤抛出错误或返回被拒绝的 Promise，控制权会跳转到最近的 <code>.catch</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">resolve</span>(<span class="number">1</span>), <span class="number">1000</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 1</span></span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;出错了&#x27;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 不会执行</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;捕获到错误:&#x27;</span>, error.<span class="property">message</span>); <span class="comment">// 捕获到错误: 出错了</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li><strong>中断链条</strong>：一旦进入 <code>.catch</code>，后续的 <code>.then</code> 依然可以接收处理（除非在 <code>.catch</code> 中再次抛出错误）。</li>
+<li><strong>异常传播</strong>：任何在 <code>.then</code> 或执行器中的未处理异常都会被转换为被拒绝的 Promise。</li>
+</ul>
+<h2 id="7-Promise-的静态方法"><a href="#7-Promise-的静态方法" class="headerlink" title="7. Promise 的静态方法"></a>7. Promise 的静态方法</h2><h3 id="Promise-all-iterable"><a href="#Promise-all-iterable" class="headerlink" title="Promise.all(iterable)"></a><code>Promise.all(iterable)</code></h3><p>接收一个包含多个 Promise 的可迭代对象，返回一个新的 Promise，该 Promise 在所有输入的 Promise 都完成后完成，并返回一个包含所有结果的数组。如果任何一个 Promise 被拒绝，则整个 <code>Promise.all</code> 会被拒绝。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> promise2 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">const</span> promise3 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">all</span>([promise1, promise2, promise3])</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">values</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(values); <span class="comment">// [1, 2, 3]</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise-race-iterable"><a href="#Promise-race-iterable" class="headerlink" title="Promise.race(iterable)"></a><code>Promise.race(iterable)</code></h3><p>返回一个新的 Promise，只要输入的 Promise 中有一个解决或拒绝，新的 Promise 就会相应地解决或拒绝。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> <span class="built_in">setTimeout</span>(resolve, <span class="number">500</span>, <span class="string">&#x27;一&#x27;</span>));</span><br><span class="line"><span class="keyword">const</span> promise2 = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> <span class="built_in">setTimeout</span>(resolve, <span class="number">100</span>, <span class="string">&#x27;二&#x27;</span>));</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">race</span>([promise1, promise2])</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value); <span class="comment">// &#x27;二&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise-allSettled-iterable"><a href="#Promise-allSettled-iterable" class="headerlink" title="Promise.allSettled(iterable)"></a><code>Promise.allSettled(iterable)</code></h3><p>等待所有的 Promise 完成（无论是成功还是失败），并返回一个包含每个 Promise 结果的数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> promise2 = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="string">&#x27;失败&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> promise3 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">allSettled</span>([promise1, promise2, promise3])</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">results</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(results);</span><br><span class="line">    <span class="comment">/* [</span></span><br><span class="line"><span class="comment">      &#123; status: &#x27;fulfilled&#x27;, value: 1 &#125;,</span></span><br><span class="line"><span class="comment">      &#123; status: &#x27;rejected&#x27;, reason: &#x27;失败&#x27; &#125;,</span></span><br><span class="line"><span class="comment">      &#123; status: &#x27;fulfilled&#x27;, value: 3 &#125;</span></span><br><span class="line"><span class="comment">    ] */</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Promise-any-iterable"><a href="#Promise-any-iterable" class="headerlink" title="Promise.any(iterable)"></a><code>Promise.any(iterable)</code></h3><p>只要有一个 Promise 被成功解决，返回该结果。如果所有的 Promise 都被拒绝，则返回一个 AggregateError。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise1 = <span class="title class_">Promise</span>.<span class="title function_">reject</span>(<span class="string">&#x27;失败1&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> promise2 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="string">&#x27;成功2&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> promise3 = <span class="title class_">Promise</span>.<span class="title function_">resolve</span>(<span class="string">&#x27;成功3&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">any</span>([promise1, promise2, promise3])</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value); <span class="comment">// &#x27;成功2&#x27;</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：<code>Promise.any</code> 在某些环境中（如老旧浏览器）可能不被支持，需要相应的 polyfill。</p>
+<h2 id="8-Async-Await-与-Promise"><a href="#8-Async-Await-与-Promise" class="headerlink" title="8. Async&#x2F;Await 与 Promise"></a>8. Async&#x2F;Await 与 Promise</h2><p><code>async</code>&#x2F;<code>await</code> 是基于 Promise 的语法糖，使异步代码看起来更像同步代码，更易于理解和维护。</p>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fetchData</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> <span class="title function_">resolve</span>(<span class="string">&#x27;数据获取成功&#x27;</span>), <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetchData</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data); <span class="comment">// 数据获取成功</span></span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">getData</span>();</span><br></pre></td></tr></table></figure>
+
+<p><strong>要点：</strong></p>
+<ul>
+<li><code>async</code> 函数会隐式返回一个 Promise。</li>
+<li><code>await</code> 只能在 <code>async</code> 函数内使用，用于等待 Promise 解决或拒绝。</li>
+</ul>
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><p>使用 <code>try...catch</code> 捕获 <code>await</code> 过程中可能出现的错误。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getData</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> <span class="title function_">fetchData</span>();</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;获取数据失败:&#x27;</span>, error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="并行执行"><a href="#并行执行" class="headerlink" title="并行执行"></a>并行执行</h3><p>使用 <code>Promise.all</code> 并行执行多个异步操作。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchMultiple</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> [data1, data2] = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>([<span class="title function_">fetchData1</span>(), <span class="title function_">fetchData2</span>()]);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(data1, data2);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：直接使用多个 <code>await</code> 会串行执行，这可能导致性能问题。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 串行执行，不推荐</span></span><br><span class="line"><span class="keyword">const</span> data1 = <span class="keyword">await</span> <span class="title function_">fetchData1</span>();</span><br><span class="line"><span class="keyword">const</span> data2 = <span class="keyword">await</span> <span class="title function_">fetchData2</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-常见陷阱与误区"><a href="#9-常见陷阱与误区" class="headerlink" title="9. 常见陷阱与误区"></a>9. 常见陷阱与误区</h2><h3 id="1-忘记返回-Promise"><a href="#1-忘记返回-Promise" class="headerlink" title="1. 忘记返回 Promise"></a>1. 忘记返回 Promise</h3><p>在 <code>.then</code> 中如果执行器函数没有返回 Promise，则无法进行链式调用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误示例</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> <span class="title function_">resolve</span>(<span class="number">1</span>))</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 没有返回值，相当于 return undefined</span></span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// undefined</span></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确示例</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> <span class="title function_">resolve</span>(<span class="number">1</span>))</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> result * <span class="number">2</span>;</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(result); <span class="comment">// 2</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-多次调用-resolve-或-reject"><a href="#2-多次调用-resolve-或-reject" class="headerlink" title="2. 多次调用 resolve 或 reject"></a>2. 多次调用 resolve 或 reject</h3><p>Promise 状态一旦改变，就不能再更改，所以多次调用 <code>resolve</code> 或 <code>reject</code> 是无效的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="string">&#x27;首次成功&#x27;</span>);</span><br><span class="line">  <span class="title function_">resolve</span>(<span class="string">&#x27;再次成功&#x27;</span>); <span class="comment">// 无效</span></span><br><span class="line">  <span class="title function_">reject</span>(<span class="string">&#x27;失败&#x27;</span>); <span class="comment">// 无效</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">promise.<span class="title function_">then</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(value); <span class="comment">// &#x27;首次成功&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-忽略错误"><a href="#3-忽略错误" class="headerlink" title="3. 忽略错误"></a>3. 忽略错误</h3><p>如果没有使用 <code>.catch</code> 处理错误，Promise 拒绝的错误可能会被忽略，导致调试困难。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;意外错误&#x27;</span>);</span><br><span class="line">&#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 如果没有 .catch，会导致未捕获的 Promise 拒绝</span></span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-回调地狱"><a href="#4-回调地狱" class="headerlink" title="4. 回调地狱"></a>4. 回调地狱</h3><p>过度嵌套多个 <code>.then</code> 会导致代码难以阅读和维护，这是传统回调地狱的问题之一。使用链式 Promise 或 <code>async</code>&#x2F;<code>await</code> 可以有效避免。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回调地狱示例</span></span><br><span class="line"><span class="title function_">doSomething</span>()</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">result</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">doSomethingElse</span>(result);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">newResult</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">doThirdThing</span>(newResult);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">finalResult</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(finalResult);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-实际例子"><a href="#10-实际例子" class="headerlink" title="10. 实际例子"></a>10. 实际例子</h2><h3 id="示例1：获取用户数据并处理"><a href="#示例1：获取用户数据并处理" class="headerlink" title="示例1：获取用户数据并处理"></a>示例1：获取用户数据并处理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getUser</span>(<span class="params">userId</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (userId === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="title function_">resolve</span>(&#123; <span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;Alice&#x27;</span> &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="title function_">reject</span>(<span class="string">&#x27;用户不存在&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">getUser</span>(<span class="number">1</span>)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">user</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;获取到用户:&#x27;</span>, user);</span><br><span class="line">    <span class="comment">// 继续处理用户数据</span></span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">getUserDetails</span>(user.<span class="property">id</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">details</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;用户详情:&#x27;</span>, details);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;错误:&#x27;</span>, error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="示例2：并行请求多个资源"><a href="#示例2：并行请求多个资源" class="headerlink" title="示例2：并行请求多个资源"></a>示例2：并行请求多个资源</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fetchResource</span>(<span class="params">url</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(<span class="string">`数据来自 <span class="subst">$&#123;url&#125;</span>`</span>);</span><br><span class="line">    &#125;, <span class="title class_">Math</span>.<span class="title function_">random</span>() * <span class="number">2000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> urls = [<span class="string">&#x27;资源1&#x27;</span>, <span class="string">&#x27;资源2&#x27;</span>, <span class="string">&#x27;资源3&#x27;</span>];</span><br><span class="line"></span><br><span class="line"><span class="title class_">Promise</span>.<span class="title function_">all</span>(urls.<span class="title function_">map</span>(fetchResource))</span><br><span class="line">  .<span class="title function_">then</span>(<span class="function">(<span class="params">results</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;所有资源:&#x27;</span>, results);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="title function_">catch</span>(<span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;获取资源时出错:&#x27;</span>, error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Promise 是处理 JavaScript 异步操作的强大工具，通过理解其工作原理、掌握常用方法和模式，可以编写出更清晰、易维护的异步代码。同时，结合 <code>async</code>&#x2F;<code>await</code> 使用，可以进一步简化异步代码的结构，提高开发效率。务必注意错误处理和避免常见陷阱，以确保代码的稳健性。</p>
+<p>如果你在学习过程中有任何疑问或需要进一步的示例，欢迎继续提问！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E5%85%B3%E4%BA%8EPromise/" data-id="cm1m7bere0002p4u6cd9k5lnq" data-title="关于Promise" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-项目部署docker篇" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T08:53:02.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/">项目部署docker篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在上回提到的开发和部署过程中引入 Docker 技术，可以优化流程、提高一致性和可移植性。使用 Docker，可以将前端、后端和数据库打包成独立的容器，简化部署和管理。以下是详细的步骤指南，介绍如何使用 Docker 在 CentOS 系统上部署你的 Nuxt + Vue3 前端、NestJS 后端以及 MongoDB 数据库项目。</p>
+<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><h3 id="1-服务器环境准备"><a href="#1-服务器环境准备" class="headerlink" title="1. 服务器环境准备"></a>1. 服务器环境准备</h3><p>确保你拥有 CentOS 服务器的访问权限，并且可以通过 SSH 连接。</p>
+<p>更新服务器软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum update -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装-Docker-和-Docker-Compose"><a href="#2-安装-Docker-和-Docker-Compose" class="headerlink" title="2. 安装 Docker 和 Docker Compose"></a>2. 安装 Docker 和 Docker Compose</h3><h4 id="安装-Docker"><a href="#安装-Docker" class="headerlink" title="安装 Docker"></a>安装 Docker</h4><ol>
+<li><p><strong>安装必要的依赖包</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y yum-utils device-mapper-persistent-data lvm2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>添加 Docker 仓库</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装 Docker Engine</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y docker-ce docker-ce-cli containerd.io</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动并设置 Docker 开机自启</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start docker</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>验证 Docker 安装</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker --version</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h4 id="安装-Docker-Compose"><a href="#安装-Docker-Compose" class="headerlink" title="安装 Docker Compose"></a>安装 Docker Compose</h4><ol>
+<li><p><strong>下载 Docker Compose 二进制文件</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> curl -L <span class="string">&quot;https://github.com/docker/compose/releases/download/v2.20.2/docker-compose-<span class="subst">$(uname -s)</span>-<span class="subst">$(uname -m)</span>&quot;</span> -o /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：请根据 <a target="_blank" rel="noopener" href="https://github.com/docker/compose/releases">Docker Compose Releases</a> 页面检查最新版本号，并替换上面的版本号 <code>v2.20.2</code>。</p>
+</blockquote>
+</li>
+<li><p><strong>赋予执行权限</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chmod</span> +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>创建软链接（可选）</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">ln</span> -s /usr/local/bin/docker-compose /usr/bin/docker-compose</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>验证 Docker Compose 安装</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-配置防火墙"><a href="#3-配置防火墙" class="headerlink" title="3. 配置防火墙"></a>3. 配置防火墙</h3><p>确保必要的端口（如80、443、22）开放：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=ssh</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="二、项目结构调整"><a href="#二、项目结构调整" class="headerlink" title="二、项目结构调整"></a>二、项目结构调整</h2><p>为了使用 Docker 部署，建议调整项目结构，使前后端项目和数据库服务在不同的容器中运行。典型的项目结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">myproject/</span><br><span class="line">├── backend/</span><br><span class="line">│   ├── Dockerfile</span><br><span class="line">│   ├── package.json</span><br><span class="line">│   ├── tsconfig.json</span><br><span class="line">│   ├── src/</span><br><span class="line">│   └── ...（其他后端文件）</span><br><span class="line">├── frontend/</span><br><span class="line">│   ├── Dockerfile</span><br><span class="line">│   ├── package.json</span><br><span class="line">│   ├── nuxt.config.js</span><br><span class="line">│   └── ...（其他前端文件）</span><br><span class="line">├── docker-compose.yml</span><br><span class="line">└── nginx/</span><br><span class="line">    ├── Dockerfile</span><br><span class="line">    └── nginx.conf</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-创建项目目录"><a href="#1-创建项目目录" class="headerlink" title="1. 创建项目目录"></a>1. 创建项目目录</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/www/myproject</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> $(<span class="built_in">whoami</span>):$(<span class="built_in">whoami</span>) /var/www/myproject</span><br><span class="line"><span class="built_in">cd</span> /var/www/myproject</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-克隆代码仓库"><a href="#2-克隆代码仓库" class="headerlink" title="2. 克隆代码仓库"></a>2. 克隆代码仓库</h3><p>假设前端和后端代码分别托管在不同的 Git 仓库中：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆前端项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yourusername/your-frontend-repo.git frontend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆后端项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yourusername/your-backend-repo.git backend</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、编写-Docker-配置文件"><a href="#三、编写-Docker-配置文件" class="headerlink" title="三、编写 Docker 配置文件"></a>三、编写 Docker 配置文件</h2><h3 id="1-后端（NestJS）Dockerfile"><a href="#1-后端（NestJS）Dockerfile" class="headerlink" title="1. 后端（NestJS）Dockerfile"></a>1. 后端（NestJS）Dockerfile</h3><p>在 <code>backend/</code> 目录下创建 <code>Dockerfile</code>：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># backend/Dockerfile</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制 package.json 和 package-lock.json</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制整个项目</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建应用</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动应用</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start:prod&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-前端（Nuxt-Vue3）Dockerfile"><a href="#2-前端（Nuxt-Vue3）Dockerfile" class="headerlink" title="2. 前端（Nuxt + Vue3）Dockerfile"></a>2. 前端（Nuxt + Vue3）Dockerfile</h3><p>在 <code>frontend/</code> 目录下创建 <code>Dockerfile</code>：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frontend/Dockerfile</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine as builder</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置工作目录</span></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制 package.json 和 package-lock.json</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装依赖</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制整个项目</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建前端应用</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm run build</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 Nginx 作为静态资源服务器</span></span><br><span class="line"><span class="keyword">FROM</span> nginx:stable-alpine</span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制构建产物到 Nginx 目录</span></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> --from=builder /app/.output/public /usr/share/nginx/html</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 复制自定义 Nginx 配置（可选）</span></span><br><span class="line"><span class="comment"># COPY nginx.conf /etc/nginx/nginx.conf</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 暴露端口</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动 Nginx</span></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;nginx&quot;</span>, <span class="string">&quot;-g&quot;</span>, <span class="string">&quot;daemon off;&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：根据 Nuxt 3 的输出配置，可能需要调整 <code>.output/public</code> 的路径。请参考 <a target="_blank" rel="noopener" href="https://v3.nuxtjs.org/docs/deployment/deployment-targets">Nuxt 3 部署文档</a> 确认构建产物路径。</p>
+</blockquote>
+<h3 id="3-Nginx-反向代理-Dockerfile（可选）"><a href="#3-Nginx-反向代理-Dockerfile（可选）" class="headerlink" title="3. Nginx 反向代理 Dockerfile（可选）"></a>3. Nginx 反向代理 Dockerfile（可选）</h3><p>为了将前端和后端通过 Nginx 进行统一代理，可以创建一个独立的 Nginx 服务。这里使用主机 Nginx 更为简单，因此此部分可选。</p>
+<h3 id="4-Docker-Compose-配置"><a href="#4-Docker-Compose-配置" class="headerlink" title="4. Docker Compose 配置"></a>4. Docker Compose 配置</h3><p>在项目根目录 <code>/var/www/myproject</code> 下创建 <code>docker-compose.yml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker-compose.yml</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mongodb:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo:6.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mongodb</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;27017:27017&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_USERNAME:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_PASSWORD:</span> <span class="string">example</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_DATABASE:</span> <span class="string">yourdbname</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongo-data:/data/db</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">backend:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./backend</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">backend</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3000:3000&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PORT=3000</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGO_URI=mongodb://root:example@mongodb:27017/yourdbname?authSource=admin</span></span><br><span class="line">      <span class="comment"># 其他环境变量</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongodb</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="attr">build:</span> <span class="string">./frontend</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">frontend</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80:80&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NUXT_API_BASE_URL=/api</span></span><br><span class="line">      <span class="comment"># 其他环境变量</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">backend</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx:stable-alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;8080:80&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;443:443&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nginx/nginx.conf:/etc/nginx/nginx.conf:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">certs:/etc/letsencrypt</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">certs-data:/var/lib/letsencrypt</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">frontend</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">backend</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">mongo-data:</span></span><br><span class="line">  <span class="attr">certs:</span></span><br><span class="line">  <span class="attr">certs-data:</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：</p>
+<ul>
+<li><code>nginx</code> 服务用于处理反向代理和 SSL（后续步骤会详细配置）。</li>
+<li>如果选择使用主机 Nginx，可以省略 <code>nginx</code> 服务。</li>
+</ul>
+</blockquote>
+<h3 id="5-Nginx-配置文件"><a href="#5-Nginx-配置文件" class="headerlink" title="5. Nginx 配置文件"></a>5. Nginx 配置文件</h3><p>在 <code>nginx/</code> 目录下创建 <code>nginx.conf</code>：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># nginx/nginx.conf</span></span><br><span class="line"><span class="section">events</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">        <span class="attribute">server_name</span> yourdomain.com www.yourdomain.com;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 强制 HTTPS</span></span><br><span class="line">        <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">        <span class="attribute">server_name</span> yourdomain.com www.yourdomain.com;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">ssl_certificate</span> /etc/letsencrypt/live/yourdomain.com/fullchain.pem;</span><br><span class="line">        <span class="attribute">ssl_certificate_key</span> /etc/letsencrypt/live/yourdomain.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">        <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line">        <span class="attribute">ssl_ciphers</span> HIGH:!aNULL:!MD5;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 前端静态文件</span></span><br><span class="line">        <span class="section">location</span> / &#123;</span><br><span class="line">            <span class="attribute">proxy_pass</span> http://frontend:80;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 后端 API 代理</span></span><br><span class="line">        <span class="section">location</span> /api/ &#123;</span><br><span class="line">            <span class="attribute">proxy_pass</span> http://backend:3000/;</span><br><span class="line">            <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Connection <span class="string">&#x27;upgrade&#x27;</span>;</span><br><span class="line">            <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">            <span class="attribute">proxy_cache_bypass</span> <span class="variable">$http_upgrade</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：</p>
+<ul>
+<li>替换 <code>yourdomain.com</code> 为你的实际域名。</li>
+<li>SSL 证书路径与 Docker Compose 中的卷配置对应。</li>
+</ul>
+</blockquote>
+<h2 id="四、配置环境变量"><a href="#四、配置环境变量" class="headerlink" title="四、配置环境变量"></a>四、配置环境变量</h2><h3 id="1-后端（NestJS）环境变量"><a href="#1-后端（NestJS）环境变量" class="headerlink" title="1. 后端（NestJS）环境变量"></a>1. 后端（NestJS）环境变量</h3><p>在 <code>backend/</code> 目录下创建 <code>.env</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># backend/.env</span><br><span class="line">PORT=3000</span><br><span class="line">MONGO_URI=mongodb://root:example@mongodb:27017/yourdbname?authSource=admin</span><br><span class="line"># 其他环境变量</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-前端（Nuxt-Vue3）环境变量"><a href="#2-前端（Nuxt-Vue3）环境变量" class="headerlink" title="2. 前端（Nuxt + Vue3）环境变量"></a>2. 前端（Nuxt + Vue3）环境变量</h3><p>在 <code>frontend/</code> 目录下创建 <code>.env</code> 或 <code>.env.production</code> 文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># frontend/.env</span><br><span class="line">NUXT_API_BASE_URL=/api</span><br><span class="line"># 其他环境变量</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：确保这些环境变量在构建前被正确加载。</p>
+</blockquote>
+<h2 id="五、使用-Docker-Compose-部署"><a href="#五、使用-Docker-Compose-部署" class="headerlink" title="五、使用 Docker Compose 部署"></a>五、使用 Docker Compose 部署</h2><h3 id="1-启动-Docker-Compose"><a href="#1-启动-Docker-Compose" class="headerlink" title="1. 启动 Docker Compose"></a>1. 启动 Docker Compose</h3><p>在项目根目录 <code>/var/www/myproject</code> 下运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+
+<p>此命令将构建并启动所有服务（前端、后端、MongoDB 和 Nginx）。</p>
+<h3 id="2-查看容器状态"><a href="#2-查看容器状态" class="headerlink" title="2. 查看容器状态"></a>2. 查看容器状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose ps</span><br></pre></td></tr></table></figure>
+
+<p>确保所有容器均在运行状态。</p>
+<h3 id="3-配置-Docker-Compose-自动重启"><a href="#3-配置-Docker-Compose-自动重启" class="headerlink" title="3. 配置 Docker Compose 自动重启"></a>3. 配置 Docker Compose 自动重启</h3><p><code>docker-compose.yml</code> 中已经配置了 <code>restart: always</code>，确保服务在服务器重启后自动启动。</p>
+<h2 id="六、配置-SSL-证书"><a href="#六、配置-SSL-证书" class="headerlink" title="六、配置 SSL 证书"></a>六、配置 SSL 证书</h2><p>为了启用 HTTPS，需要获取 SSL 证书。我们将使用 Let’s Encrypt 的 Certbot 工具。</p>
+<h3 id="1-安装-Certbot"><a href="#1-安装-Certbot" class="headerlink" title="1. 安装 Certbot"></a>1. 安装 Certbot</h3><p>在 CentOS 上安装 Certbot：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install -y certbot</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-生成-SSL-证书"><a href="#2-生成-SSL-证书" class="headerlink" title="2. 生成 SSL 证书"></a>2. 生成 SSL 证书</h3><p>临时启动 Nginx 服务以完成域名的 DNS 验证。由于我们已经配置了 <code>nginx</code> 服务在 Docker Compose 中监听 80 端口，需要在获取证书前确保 Nginx 可以正确处理验证请求。</p>
+<p>如果你使用 Docker 配置的 Nginx 管理 SSL，可以使用 Certbot 的 DNS 或单独配置证书。这里推荐使用 Certbot 的 <code>--nginx</code> 插件直接配置 SSL。</p>
+<p>进入 <code>nginx</code> 服务并安装 Certbot：</p>
+<p>由于 Nginx 在 Docker 容器中运行，直接在容器中使用 Certbot 可能较为复杂。更简单的方法是在主机上使用 Certbot，然后将证书挂载到 Nginx 容器中。</p>
+<h4 id="方法一：在主机上获取证书"><a href="#方法一：在主机上获取证书" class="headerlink" title="方法一：在主机上获取证书"></a>方法一：在主机上获取证书</h4><ol>
+<li><p><strong>暂时停止 Docker Compose 中的 Nginx 服务</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose stop nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用 Certbot 获取证书</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot certonly --standalone -d yourdomain.com -d www.yourdomain.com</span><br></pre></td></tr></table></figure>
+
+<p> 按照提示完成认证过程。这将在主机上的 <code>/etc/letsencrypt/live/yourdomain.com/</code> 目录下生成 SSL 证书。</p>
+</li>
+<li><p><strong>启动 Docker Compose 中的 Nginx 服务</strong>：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose start nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>确保 <code>docker-compose.yml</code> 中的 Nginx 配置正确挂载证书</strong>：</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx:stable-alpine</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;80:80&quot;</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;443:443&quot;</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nginx/nginx.conf:/etc/nginx/nginx.conf:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/etc/letsencrypt:/etc/letsencrypt:ro</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/lib/letsencrypt:/var/lib/letsencrypt:ro</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：确保主机上的 <code>/etc/letsencrypt</code> 目录已经包含 SSL 证书。</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="方法二：在-Docker-中使用-Certbot"><a href="#方法二：在-Docker-中使用-Certbot" class="headerlink" title="方法二：在 Docker 中使用 Certbot"></a>方法二：在 Docker 中使用 Certbot</h4><ol>
+<li><strong>在 Docker Compose 中添加 Certbot 服务</strong>（需要复杂的配置和自动化脚本，不在此详细展开）。此方法更为复杂，推荐方法一。</li>
+</ol>
+<h3 id="3-配置自动续期"><a href="#3-配置自动续期" class="headerlink" title="3. 配置自动续期"></a>3. 配置自动续期</h3><p>让 Certbot 定期续期 SSL 证书。Certbot 通常会自动添加续期任务，但你可以手动测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot renew --dry-run</span><br></pre></td></tr></table></figure>
+
+<p>若使用主机上的 Certbot，请确保挂载的 <code>/etc/letsencrypt</code> 目录保持最新，Nginx 容器可以访问最新证书。</p>
+<h2 id="七、优化与安全"><a href="#七、优化与安全" class="headerlink" title="七、优化与安全"></a>七、优化与安全</h2><h3 id="1-数据持久化"><a href="#1-数据持久化" class="headerlink" title="1. 数据持久化"></a>1. 数据持久化</h3><p>确保 MongoDB 数据持久化，通过 Docker 卷挂载数据目录：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mongodb:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongo-data:/data/db</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-环境变量安全"><a href="#2-环境变量安全" class="headerlink" title="2. 环境变量安全"></a>2. 环境变量安全</h3><p>敏感信息（如数据库密码）应通过 <code>.env</code> 文件或 Docker secrets 进行管理，不应硬编码在 <code>docker-compose.yml</code> 中。</p>
+<h3 id="3-网络配置"><a href="#3-网络配置" class="headerlink" title="3. 网络配置"></a>3. 网络配置</h3><p>默认情况下，Docker Compose 会为服务创建一个内部网络，服务间可以通过服务名称相互访问（如 <code>mongodb</code>、<code>backend</code>、<code>frontend</code>）。</p>
+<h3 id="4-日志管理"><a href="#4-日志管理" class="headerlink" title="4. 日志管理"></a>4. 日志管理</h3><p>Docker Container 的日志可通过 <code>docker-compose logs</code> 查看，或者配置日志驱动将日志发送到集中式日志系统。</p>
+<h3 id="5-防火墙和安全组"><a href="#5-防火墙和安全组" class="headerlink" title="5. 防火墙和安全组"></a>5. 防火墙和安全组</h3><p>确保防火墙只开放必要的端口（如 80、443、22），其他服务端口（如 27017、3000）仅对内部网络开放。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=ssh</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-SELinux-配置"><a href="#6-SELinux-配置" class="headerlink" title="6. SELinux 配置"></a>6. SELinux 配置</h3><p>如果启用 SELinux，确保 Docker 有足够的权限访问挂载的卷和端口。</p>
+<p>检查 SELinux 状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sestatus</span><br></pre></td></tr></table></figure>
+
+<p>若需要，允许 HTTPD 连接网络：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setsebool -P httpd_can_network_connect on</span><br></pre></td></tr></table></figure>
+
+<h3 id="7-资源限制（可选）"><a href="#7-资源限制（可选）" class="headerlink" title="7. 资源限制（可选）"></a>7. 资源限制（可选）</h3><p>在 <code>docker-compose.yml</code> 中为各服务设置资源限制，防止单个容器占用过多资源：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">backend:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&quot;1.0&quot;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">&quot;512M&quot;</span></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&quot;0.5&quot;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">&quot;256M&quot;</span></span><br><span class="line">  <span class="attr">mongodb:</span></span><br><span class="line">    <span class="string">...</span></span><br><span class="line">    <span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">resources:</span></span><br><span class="line">        <span class="attr">limits:</span></span><br><span class="line">          <span class="attr">cpus:</span> <span class="string">&quot;2.0&quot;</span></span><br><span class="line">          <span class="attr">memory:</span> <span class="string">&quot;2G&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：<code>deploy</code> 配置在 Docker Swarm 中有效，对于单机 Docker Compose，可使用 <code>deploy</code> 的资源限制作为参考。</p>
+</blockquote>
+<h2 id="八、部署与测试"><a href="#八、部署与测试" class="headerlink" title="八、部署与测试"></a>八、部署与测试</h2><h3 id="1-构建并启动所有服务"><a href="#1-构建并启动所有服务" class="headerlink" title="1. 构建并启动所有服务"></a>1. 构建并启动所有服务</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d --build</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-查看服务日志"><a href="#2-查看服务日志" class="headerlink" title="2. 查看服务日志"></a>2. 查看服务日志</h3><p>确保所有服务正常启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs -f</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-访问应用"><a href="#3-访问应用" class="headerlink" title="3. 访问应用"></a>3. 访问应用</h3><ul>
+<li><strong>前端</strong>：访问 <code>http://yourdomain.com</code> 或 <code>https://yourdomain.com</code>。</li>
+<li><strong>后端 API</strong>：通过前端发起的请求（如 <code>https://yourdomain.com/api/...</code>）。</li>
+</ul>
+<h3 id="4-测试功能"><a href="#4-测试功能" class="headerlink" title="4. 测试功能"></a>4. 测试功能</h3><ul>
+<li>确认前端页面正常加载。</li>
+<li>确认前端能够成功调用后端 API。</li>
+<li>确认后端能够正确连接 MongoDB 并操作数据库。</li>
+</ul>
+<h3 id="5-排查问题"><a href="#5-排查问题" class="headerlink" title="5. 排查问题"></a>5. 排查问题</h3><p>如遇问题，查看相关服务的日志：</p>
+<ul>
+<li><p><strong>Nginx</strong>：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs -f nginx</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>前端</strong>：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs -f frontend</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>后端</strong>：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs -f backend</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>MongoDB</strong>：</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose logs -f mongodb</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="九、开发环境中的-Docker-使用"><a href="#九、开发环境中的-Docker-使用" class="headerlink" title="九、开发环境中的 Docker 使用"></a>九、开发环境中的 Docker 使用</h2><p>为了在开发环境中使用 Docker，确保开发代码能够被容器实时更新。可以通过挂载主机代码目录到容器中，并使用适合开发的命令（如 <code>npm run dev</code>）。</p>
+<h3 id="示例：开发模式的-docker-compose-dev-yml"><a href="#示例：开发模式的-docker-compose-dev-yml" class="headerlink" title="示例：开发模式的 docker-compose.dev.yml"></a>示例：开发模式的 <code>docker-compose.dev.yml</code></h3><p>创建一个 <code>docker-compose.dev.yml</code> 文件用于开发环境：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker-compose.dev.yml</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3.8&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">mongodb:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">mongo:6.0</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">mongodb_dev</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;27017:27017&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_USERNAME:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_ROOT_PASSWORD:</span> <span class="string">example</span></span><br><span class="line">      <span class="attr">MONGO_INITDB_DATABASE:</span> <span class="string">yourdbname</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongo-data-dev:/data/db</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">backend:</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./backend</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile.dev</span> <span class="comment"># 为开发环境创建不同的 Dockerfile</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">backend_dev</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3000:3000&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">PORT=3000</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">MONGO_URI=mongodb://root:example@mongodb:27017/yourdbname?authSource=admin</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./backend:/app</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/node_modules</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">start:dev</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">mongodb</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">frontend:</span></span><br><span class="line">    <span class="attr">build:</span></span><br><span class="line">      <span class="attr">context:</span> <span class="string">./frontend</span></span><br><span class="line">      <span class="attr">dockerfile:</span> <span class="string">Dockerfile.dev</span> <span class="comment"># 为开发环境创建不同的 Dockerfile</span></span><br><span class="line">    <span class="attr">container_name:</span> <span class="string">frontend_dev</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3001:3000&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">NUXT_API_BASE_URL=/api</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./frontend:/app</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/app/node_modules</span></span><br><span class="line">    <span class="attr">command:</span> <span class="string">npm</span> <span class="string">run</span> <span class="string">dev</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">backend</span></span><br><span class="line"></span><br><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">mongo-data-dev:</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="创建开发环境的-Dockerfiles"><a href="#创建开发环境的-Dockerfiles" class="headerlink" title="创建开发环境的 Dockerfiles"></a>创建开发环境的 Dockerfiles</h3><h4 id="后端开发-Dockerfile-backend-Dockerfile-dev"><a href="#后端开发-Dockerfile-backend-Dockerfile-dev" class="headerlink" title="后端开发 Dockerfile (backend/Dockerfile.dev)"></a>后端开发 Dockerfile (<code>backend/Dockerfile.dev</code>)</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># backend/Dockerfile.dev</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;start:dev&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="前端开发-Dockerfile-frontend-Dockerfile-dev"><a href="#前端开发-Dockerfile-frontend-Dockerfile-dev" class="headerlink" title="前端开发 Dockerfile (frontend/Dockerfile.dev)"></a>前端开发 Dockerfile (<code>frontend/Dockerfile.dev</code>)</h4><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># frontend/Dockerfile.dev</span></span><br><span class="line"><span class="keyword">FROM</span> node:<span class="number">18</span>-alpine</span><br><span class="line"></span><br><span class="line"><span class="keyword">WORKDIR</span><span class="language-bash"> /app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> package*.json ./</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> npm install</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">COPY</span><span class="language-bash"> . .</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;npm&quot;</span>, <span class="string">&quot;run&quot;</span>, <span class="string">&quot;dev&quot;</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="启动开发环境"><a href="#启动开发环境" class="headerlink" title="启动开发环境"></a>启动开发环境</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose -f docker-compose.dev.yml up -d --build</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>注意</strong>：前端开发服务映射到主机的 <code>3001</code> 端口，避免与生产环境的 <code>80</code> 端口冲突。</p>
+</blockquote>
+<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><p>通过引入 Docker 技术，可以显著优化开发和部署流程，实现以下优势：</p>
+<ol>
+<li><strong>环境一致性</strong>：确保开发、测试和生产环境的一致性，减少“在我机器上可以运行”的问题。</li>
+<li><strong>简化部署</strong>：使用 Docker Compose 可以一键启动所有服务，简化部署步骤。</li>
+<li><strong>隔离性</strong>：各服务在独立的容器中运行，避免依赖冲突和环境污染。</li>
+<li><strong>可扩展性</strong>：方便水平扩展服务，如增加后端实例以提升性能。</li>
+<li><strong>便捷的版本控制</strong>：通过 Docker 镜像版本控制，轻松回滚到之前的稳定版本。</li>
+</ol>
+<h3 id="关键步骤回顾："><a href="#关键步骤回顾：" class="headerlink" title="关键步骤回顾："></a>关键步骤回顾：</h3><ol>
+<li><strong>安装 Docker 和 Docker Compose</strong>：在 CentOS 上安装并配置好 Docker 环境。</li>
+<li><strong>项目结构调整</strong>：确保前后端项目具备 Docker 配置文件，统一管理。</li>
+<li><strong>编写 Docker 配置文件</strong>：为前后端和数据库编写 Dockerfile，配置 Docker Compose。</li>
+<li><strong>配置 SSL 证书</strong>：使用 Let’s Encrypt 为 Nginx 配置 SSL，确保安全通信。</li>
+<li><strong>优化与安全</strong>：配置数据持久化、环境变量管理、网络安全等。</li>
+<li><strong>部署与测试</strong>：通过 Docker Compose 部署所有服务，验证应用功能。</li>
+<li><strong>开发环境优化</strong>：通过 Docker Compose 配置开发环境，实现实时代码更新和热重载。</li>
+</ol>
+<p>通过上述步骤，你可以利用 Docker 技术高效、稳定地在 CentOS 服务器上部署与管理你的 Nuxt + Vue3 前端、NestJS 后端和 MongoDB 数据库项目。如有进一步问题，欢迎随时提问！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/" data-id="cm1m7beri0009p4u6egvn0hc6" data-title="项目部署docker篇" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deploy/" rel="tag">deploy</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-项目部署" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T08:31:06.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">项目部署</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>部署环境 centos</li>
+<li>部署项目 前端nuxt3+vue 后端nestjs + mongoDB</li>
+</ul>
+<p>在CentOS服务器上部署一个前后端分离的项目涉及多个步骤，包括环境准备、代码部署、构建与运行应用、配置数据库和反向代理等。以下是详细的步骤指南：</p>
+<h2 id="一、准备工作"><a href="#一、准备工作" class="headerlink" title="一、准备工作"></a>一、准备工作</h2><ol>
+<li><p><strong>确保你有CentOS服务器的访问权限</strong>，并且可以通过SSH进行连接。</p>
+</li>
+<li><p><strong>确保服务器已更新</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum update -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>配置防火墙</strong>，确保必要的端口（如80、443、22）开放：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=ssh</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、安装必要的软件"><a href="#二、安装必要的软件" class="headerlink" title="二、安装必要的软件"></a>二、安装必要的软件</h2><h3 id="1-安装-Node-js-和-npm"><a href="#1-安装-Node-js-和-npm" class="headerlink" title="1. 安装 Node.js 和 npm"></a>1. 安装 Node.js 和 npm</h3><p>选择与你在Windows开发环境中使用的Node.js版本一致的版本。例如，假设使用的是Node.js 18：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://rpm.nodesource.com/setup_18.x | <span class="built_in">sudo</span> bash -</span><br><span class="line"><span class="built_in">sudo</span> yum install -y nodejs</span><br></pre></td></tr></table></figure>
+
+<p>验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装-MongoDB"><a href="#2-安装-MongoDB" class="headerlink" title="2. 安装 MongoDB"></a>2. 安装 MongoDB</h3><p>为CentOS安装MongoDB的步骤如下：</p>
+<ol>
+<li><p><strong>创建MongoDB的repo文件</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tee</span> /etc/yum.repos.d/mongodb-org-6.0.repo &lt;&lt;<span class="string">EOF</span></span><br><span class="line"><span class="string">[mongodb-org-6.0]</span></span><br><span class="line"><span class="string">name=MongoDB Repository</span></span><br><span class="line"><span class="string">baseurl=https://repo.mongodb.org/yum/redhat/\$releasever/mongodb-org/6.0/x86_64/</span></span><br><span class="line"><span class="string">gpgcheck=1</span></span><br><span class="line"><span class="string">enabled=1</span></span><br><span class="line"><span class="string">gpgkey=https://www.mongodb.org/static/pgp/server-6.0.asc</span></span><br><span class="line"><span class="string">EOF</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>安装MongoDB</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y mongodb-org</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>启动并配置MongoDB为开机自启</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start mongod</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> mongod</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查MongoDB状态</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl status mongod</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h3 id="3-安装-Nginx"><a href="#3-安装-Nginx" class="headerlink" title="3. 安装 Nginx"></a>3. 安装 Nginx</h3><p>Nginx 将作为反向代理服务器，用于处理前端和后端的请求。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install -y nginx</span><br></pre></td></tr></table></figure>
+
+<p>启动并设置Nginx开机自启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure>
+
+<p>检查Nginx状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl status nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-安装-PM2（进程管理器）"><a href="#4-安装-PM2（进程管理器）" class="headerlink" title="4. 安装 PM2（进程管理器）"></a>4. 安装 PM2（进程管理器）</h3><p>PM2 用于管理Node.js应用的运行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> npm install -g pm2</span><br></pre></td></tr></table></figure>
+
+<p>验证安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="三、部署代码"><a href="#三、部署代码" class="headerlink" title="三、部署代码"></a>三、部署代码</h2><h3 id="1-将代码传输到服务器"><a href="#1-将代码传输到服务器" class="headerlink" title="1. 将代码传输到服务器"></a>1. 将代码传输到服务器</h3><p>有多种方法可以将代码从Windows传输到服务器，包括：</p>
+<ul>
+<li><strong>Git</strong>：建议将项目代码托管在Git仓库（如GitHub、GitLab），然后在服务器上克隆。</li>
+<li><strong>SCP 或 SFTP</strong>：使用工具如 WinSCP 手动上传文件。</li>
+<li><strong>使用 Git</strong>举例：</li>
+</ul>
+<p>假设你已经将前端和后端代码分别托管在不同的仓库中。</p>
+<p>在服务器上，选择一个合适的目录（如 <code>/var/www</code>）存放项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mkdir</span> -p /var/www/myproject</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> $(<span class="built_in">whoami</span>):$(<span class="built_in">whoami</span>) /var/www/myproject</span><br><span class="line"><span class="built_in">cd</span> /var/www/myproject</span><br></pre></td></tr></table></figure>
+
+<p>克隆前端和后端项目：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆前端项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yourusername/your-frontend-repo.git frontend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 克隆后端项目</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yourusername/your-backend-repo.git backend</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-安装依赖并构建前端"><a href="#2-安装依赖并构建前端" class="headerlink" title="2. 安装依赖并构建前端"></a>2. 安装依赖并构建前端</h3><p>进入前端目录，安装依赖并进行构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/frontend</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果使用环境变量，确保在根目录创建 .env 文件或根据需要配置</span></span><br><span class="line"><span class="comment"># 构建前端项目（具体命令可能根据项目配置不同而不同）</span></span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-安装依赖并启动后端"><a href="#3-安装依赖并启动后端" class="headerlink" title="3. 安装依赖并启动后端"></a>3. 安装依赖并启动后端</h3><p>进入后端目录，安装依赖并启动NestJS应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/backend</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构建NestJS应用（如果使用编译）</span></span><br><span class="line">npm run build</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用 PM2 启动应用</span></span><br><span class="line">pm2 start dist/main.js --name backend</span><br><span class="line"></span><br><span class="line"><span class="comment"># 保存 PM2 进程列表，以便重启后自动启动</span></span><br><span class="line">pm2 save</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-配置-PM2-开机自启"><a href="#4-配置-PM2-开机自启" class="headerlink" title="4. 配置 PM2 开机自启"></a>4. 配置 PM2 开机自启</h3><p>设置 PM2 开机自动启动进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 startup systemd</span><br></pre></td></tr></table></figure>
+
+<p>根据提示复制并运行生成的命令。例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">env</span> PATH=<span class="variable">$PATH</span>:/usr/bin pm2 startup systemd -u yourusername --hp /home/yourusername</span><br></pre></td></tr></table></figure>
+
+<p>然后，保存当前的 PM2 进程列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 save</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、配置-Nginx-作为反向代理"><a href="#四、配置-Nginx-作为反向代理" class="headerlink" title="四、配置 Nginx 作为反向代理"></a>四、配置 Nginx 作为反向代理</h2><p>假设你的前端项目已经构建，并且输出到 <code>dist</code> 目录或通过PM2运行。这里假设前端通过Nginx直接提供静态文件，后端通过Nginx进行代理。</p>
+<h3 id="1-配置-Nginx"><a href="#1-配置-Nginx" class="headerlink" title="1. 配置 Nginx"></a>1. 配置 Nginx</h3><p>编辑 Nginx 配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vi /etc/nginx/conf.d/myproject.conf</span><br></pre></td></tr></table></figure>
+
+<p>示例配置（请根据实际情况调整）：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> yourdomain.com; <span class="comment"># 替换为你的域名或服务器IP</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 前端静态文件</span></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span> /var/www/myproject/frontend/.output/public; <span class="comment"># 根据Nuxt构建输出的位置调整</span></span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 后端API代理</span></span><br><span class="line">    <span class="section">location</span> /api/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:3000/; <span class="comment"># 假设后端NestJS运行在3000端口</span></span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&#x27;upgrade&#x27;</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_cache_bypass</span> <span class="variable">$http_upgrade</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：处理WebSocket</span></span><br><span class="line">    <span class="section">location</span> /socket.io/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:3000/socket.io/;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="string">&quot;Upgrade&quot;</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：</p>
+<ul>
+<li>确保前端构建输出路径正确。如果使用Nuxt 3，可以参考 <a target="_blank" rel="noopener" href="https://v3.nuxtjs.org/docs/deployment/hosting-vps-netlify-vercel">Nuxt 3 部署指南</a>。</li>
+<li>确保后端API的路径前缀（如 <code>/api/</code>）与前端请求一致。</li>
+</ul>
+<h3 id="2-测试-Nginx-配置并重启"><a href="#2-测试-Nginx-配置并重启" class="headerlink" title="2. 测试 Nginx 配置并重启"></a>2. 测试 Nginx 配置并重启</h3><p>测试配置是否有语法错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure>
+
+<p>如果输出 <code>syntax is ok</code> 和 <code>test is successful</code>，则重启Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl restart nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置防火墙以允许HTTP和HTTPS流量"><a href="#3-配置防火墙以允许HTTP和HTTPS流量" class="headerlink" title="3. 配置防火墙以允许HTTP和HTTPS流量"></a>3. 配置防火墙以允许HTTP和HTTPS流量</h3><p>已在准备工作中进行了，但再次确认：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、配置环境变量"><a href="#五、配置环境变量" class="headerlink" title="五、配置环境变量"></a>五、配置环境变量</h2><p>确保前后端项目在服务器上使用正确的环境变量。</p>
+<h3 id="1-后端（NestJS）"><a href="#1-后端（NestJS）" class="headerlink" title="1. 后端（NestJS）"></a>1. 后端（NestJS）</h3><p>编辑后端项目的 <code>.env</code> 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/backend</span><br><span class="line">vi .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p>设置必要的环境变量，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PORT=3000</span><br><span class="line">MONGO_URI=mongodb://localhost:27017/yourdbname</span><br><span class="line"># 其他环境变量</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-前端（Nuxt-Vue3）"><a href="#2-前端（Nuxt-Vue3）" class="headerlink" title="2. 前端（Nuxt + Vue3）"></a>2. 前端（Nuxt + Vue3）</h3><p>根据项目需求，编辑前端的环境变量文件（如 <code>.env</code> 或 <code>.env.production</code>）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/www/myproject/frontend</span><br><span class="line">vi .<span class="built_in">env</span></span><br></pre></td></tr></table></figure>
+
+<p>设置必要的环境变量，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">API_BASE_URL=/api</span><br><span class="line"># 其他环境变量</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：确保在构建前设置这些环境变量，或者通过运行时配置来处理。</p>
+<h2 id="六、域名和SSL配置（可选）"><a href="#六、域名和SSL配置（可选）" class="headerlink" title="六、域名和SSL配置（可选）"></a>六、域名和SSL配置（可选）</h2><h3 id="1-指向域名"><a href="#1-指向域名" class="headerlink" title="1. 指向域名"></a>1. 指向域名</h3><p>确保你的域名指向CentOS服务器的IP地址，通常在域名注册商的管理面板中配置A记录。</p>
+<h3 id="2-安装-Certbot-并获取SSL证书"><a href="#2-安装-Certbot-并获取SSL证书" class="headerlink" title="2. 安装 Certbot 并获取SSL证书"></a>2. 安装 Certbot 并获取SSL证书</h3><p>使用 Let’s Encrypt 提供免费SSL证书。</p>
+<h4 id="安装-EPEL-和-Certbot"><a href="#安装-EPEL-和-Certbot" class="headerlink" title="安装 EPEL 和 Certbot"></a>安装 EPEL 和 Certbot</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install -y certbot python3-certbot-nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取和安装SSL证书"><a href="#获取和安装SSL证书" class="headerlink" title="获取和安装SSL证书"></a>获取和安装SSL证书</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx -d yourdomain.com -d www.yourdomain.com</span><br></pre></td></tr></table></figure>
+
+<p>按照提示完成认证过程。Certbot会自动配置Nginx以使用SSL。</p>
+<h4 id="自动续期"><a href="#自动续期" class="headerlink" title="自动续期"></a>自动续期</h4><p>Certbot会自动添加一个cron任务来续期证书。你可以手动测试续期：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot renew --dry-run</span><br></pre></td></tr></table></figure>
+
+<h2 id="七、优化与安全"><a href="#七、优化与安全" class="headerlink" title="七、优化与安全"></a>七、优化与安全</h2><h3 id="1-设置UFW（可选）"><a href="#1-设置UFW（可选）" class="headerlink" title="1. 设置UFW（可选）"></a>1. 设置UFW（可选）</h3><p>CentOS默认使用 firewalld，已经在前面配置过。如果你更习惯使用 UFW，可以安装并配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install -y epel-release</span><br><span class="line"><span class="built_in">sudo</span> yum install -y ufw</span><br><span class="line"><span class="built_in">sudo</span> systemctl start ufw</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> ufw</span><br></pre></td></tr></table></figure>
+
+<p>配置规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> ufw allow OpenSSH</span><br><span class="line"><span class="built_in">sudo</span> ufw allow <span class="string">&#x27;Nginx Full&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> ufw <span class="built_in">enable</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-配置-SELinux（如果启用）"><a href="#2-配置-SELinux（如果启用）" class="headerlink" title="2. 配置 SELinux（如果启用）"></a>2. 配置 SELinux（如果启用）</h3><p>如果 SELinux 启用，确保它允许 Nginx 访问相关目录和端口。</p>
+<p>检查SELinux状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sestatus</span><br></pre></td></tr></table></figure>
+
+<p>如果需要，可以调整策略。例如，允许 Nginx 访问网络：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> setsebool -P httpd_can_network_connect on</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-设置日志轮转"><a href="#3-设置日志轮转" class="headerlink" title="3. 设置日志轮转"></a>3. 设置日志轮转</h3><p>确保日志不会占满磁盘。默认情况下，Nginx 和 PM2 已有日志轮转配置，但可以进一步优化。</p>
+<h3 id="4-性能优化"><a href="#4-性能优化" class="headerlink" title="4. 性能优化"></a>4. 性能优化</h3><ul>
+<li><p><strong>使用 CDN</strong>：为前端静态资源配置CDN以提高加载速度。</p>
+</li>
+<li><p><strong>启用Gzip压缩</strong>：在Nginx配置中启用Gzip：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain application/xml;</span><br><span class="line">    <span class="comment"># 其他配置...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>缓存策略</strong>：根据需求配置Nginx的缓存策略。</p>
+</li>
+</ul>
+<h2 id="八、测试部署"><a href="#八、测试部署" class="headerlink" title="八、测试部署"></a>八、测试部署</h2><ol>
+<li><p><strong>访问网站</strong>：在浏览器中访问 <code>http://yourdomain.com</code> 或 <code>https://yourdomain.com</code>，确保前端正常加载。</p>
+</li>
+<li><p><strong>测试API</strong>：确保前端能够成功与后端API进行通信。</p>
+</li>
+<li><p><strong>检查看日志</strong>：</p>
+<ul>
+<li><p>Nginx日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/nginx/access.log /var/log/nginx/error.log</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PM2日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 logs backend</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MongoDB日志：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">tail</span> -f /var/log/mongodb/mongod.log</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="九、常见问题排查"><a href="#九、常见问题排查" class="headerlink" title="九、常见问题排查"></a>九、常见问题排查</h2><ol>
+<li><strong>端口被占用</strong>：确保后端NestJS应用监听的端口（如3000）未被其他服务占用。</li>
+<li><strong>防火墙问题</strong>：确认所有必要的端口已开放，尤其是在配置SSL后可能需要开放443端口。</li>
+<li><strong>权限问题</strong>：确保Nginx有权限访问前端构建输出的目录，以及后端应用有权限读取配置文件和环境变量。</li>
+<li><strong>日志检查</strong>：通过查看Nginx、PM2和MongoDB的日志来排查问题。</li>
+</ol>
+<h2 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h2><p>通过以上步骤，你应该能够在CentOS服务器上成功部署一个前后端分离的项目，其中前端使用Nuxt + Vue3，后端使用NestJS，并连接MongoDB数据库。以下是关键点回顾：</p>
+<ol>
+<li><strong>环境准备</strong>：安装Node.js、MongoDB和Nginx。</li>
+<li><strong>代码部署</strong>：将前后端代码传输到服务器，安装依赖，构建前端，启动后端。</li>
+<li><strong>反向代理配置</strong>：使用Nginx处理静态文件和API请求。</li>
+<li><strong>安全配置</strong>：设置SSL证书，配置防火墙和SELinux。</li>
+<li><strong>优化与测试</strong>：确保应用性能和安全，以及通过日志进行监控。</li>
+</ol>
+<p>根据具体项目需求，可能需要进一步调整配置或添加额外的功能，如负载均衡、缓存优化等。确保定期备份关键数据，特别是MongoDB数据库，以防数据丢失。</p>
+<p>如有任何进一步的问题，欢迎随时提问！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/" data-id="cm1m7berj000ap4u6f13rbyjs" data-title="项目部署" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deploy/" rel="tag">deploy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-如何使用nginx在一台设备上部署多个前端项目" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E5%9C%A8%E4%B8%80%E5%8F%B0%E8%AE%BE%E5%A4%87%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T08:18:33.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E5%9C%A8%E4%B8%80%E5%8F%B0%E8%AE%BE%E5%A4%87%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/">如何使用nginx在一台设备上部署多个前端项目</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>如果在 CentOS 系统上使用 Nginx 部署多个 Vue 前端项目，可以通过为每个项目配置不同的服务器块（server blocks）或使用不同的路径来实现。以下是详细的步骤：</p>
+<h3 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h3><h4 id="a-更新系统软件包"><a href="#a-更新系统软件包" class="headerlink" title="a. 更新系统软件包"></a>a. 更新系统软件包</h4><p>首先，确保系统的软件包是最新的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum update -y</span><br></pre></td></tr></table></figure>
+
+<h4 id="b-安装-Nginx"><a href="#b-安装-Nginx" class="headerlink" title="b. 安装 Nginx"></a>b. 安装 Nginx</h4><p>如果尚未安装 Nginx，可以通过以下命令进行安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install epel-release -y</span><br><span class="line"><span class="built_in">sudo</span> yum install nginx -y</span><br></pre></td></tr></table></figure>
+
+<p>启动并设置 Nginx 开机自启：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nginx</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-编译-Vue-项目"><a href="#2-编译-Vue-项目" class="headerlink" title="2. 编译 Vue 项目"></a>2. 编译 Vue 项目</h3><p>假设你已经有多个 Vue 项目，例如 <code>project1</code> 和 <code>project2</code>。确保每个项目都已构建为生产环境的静态文件。</p>
+<p>进入每个项目目录，执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+
+<p>构建完成后，通常会在 <code>dist</code> 目录下生成静态文件。将这些文件复制到服务器上的特定目录，例如：</p>
+<ul>
+<li><code>/var/www/project1</code></li>
+<li><code>/var/www/project2</code></li>
+</ul>
+<p>可以使用 <code>scp</code> 或其他方式将文件上传到服务器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">scp -r ./dist user@your_server_ip:/var/www/project1</span><br><span class="line">scp -r ./dist user@your_server_ip:/var/www/project2</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置-Nginx"><a href="#3-配置-Nginx" class="headerlink" title="3. 配置 Nginx"></a>3. 配置 Nginx</h3><p>有两种常见的方法来配置 Nginx 以部署多个 Vue 前端项目：</p>
+<ul>
+<li><strong>基于不同的域名或子域名</strong></li>
+<li><strong>基于不同的路径</strong></li>
+</ul>
+<p>以下分别介绍这两种方法的配置步骤。</p>
+<h4 id="方法一：基于不同的域名或子域名"><a href="#方法一：基于不同的域名或子域名" class="headerlink" title="方法一：基于不同的域名或子域名"></a>方法一：基于不同的域名或子域名</h4><p>假设你有两个子域名：</p>
+<ul>
+<li><code>app1.example.com</code> 指向 <code>project1</code></li>
+<li><code>app2.example.com</code> 指向 <code>project2</code></li>
+</ul>
+<h5 id="a-配置-DNS"><a href="#a-配置-DNS" class="headerlink" title="a. 配置 DNS"></a>a. 配置 DNS</h5><p>确保这两个子域名已经在 DNS 上解析到你的服务器 IP 地址。</p>
+<h5 id="b-创建-Nginx-服务器块"><a href="#b-创建-Nginx-服务器块" class="headerlink" title="b. 创建 Nginx 服务器块"></a>b. 创建 Nginx 服务器块</h5><p>在 <code>/etc/nginx/conf.d/</code> 目录下为每个项目创建单独的配置文件。</p>
+<p><strong>项目1：<code>project1.conf</code></strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> app1.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /var/www/project1;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：配置Gzip压缩，缓存等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>项目2：<code>project2.conf</code></strong></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> app2.example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">root</span> /var/www/project2;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line"></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：配置Gzip压缩，缓存等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="c-测试并重启-Nginx"><a href="#c-测试并重启-Nginx" class="headerlink" title="c. 测试并重启 Nginx"></a>c. 测试并重启 Nginx</h5><p>测试 Nginx 配置是否正确：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br></pre></td></tr></table></figure>
+
+<p>如果输出显示配置文件语法正确，重启 Nginx 以应用更改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法二：基于不同的路径"><a href="#方法二：基于不同的路径" class="headerlink" title="方法二：基于不同的路径"></a>方法二：基于不同的路径</h4><p>如果你希望通过不同的路径来访问不同的应用，例如：</p>
+<ul>
+<li><code>example.com/app1</code> 指向 <code>project1</code></li>
+<li><code>example.com/app2</code> 指向 <code>project2</code></li>
+</ul>
+<h5 id="a-创建-Nginx-服务器块"><a href="#a-创建-Nginx-服务器块" class="headerlink" title="a. 创建 Nginx 服务器块"></a>a. 创建 Nginx 服务器块</h5><p>编辑主 Nginx 配置文件或在 <code>/etc/nginx/conf.d/</code> 目录下创建一个新的配置文件，例如 <code>multi_vue.conf</code>。</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 项目1</span></span><br><span class="line">    <span class="section">location</span> /app1/ &#123;</span><br><span class="line">        <span class="attribute">alias</span> /var/www/project1/;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /app1/index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 项目2</span></span><br><span class="line">    <span class="section">location</span> /app2/ &#123;</span><br><span class="line">        <span class="attribute">alias</span> /var/www/project2/;</span><br><span class="line">        <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /app2/index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 默认主页或其他处理</span></span><br><span class="line">    <span class="section">location</span> / &#123;</span><br><span class="line">        <span class="attribute">root</span> /usr/share/nginx/html;</span><br><span class="line">        <span class="attribute">index</span> index.html;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 可选：配置Gzip压缩，缓存等</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>使用 <code>alias</code> 而不是 <code>root</code>，以确保正确映射路径。</li>
+<li>确保 Vue Router 的模式为 <code>history</code>，并且配置了 <code>try_files</code> 指令以处理路由。</li>
+</ul>
+<h5 id="b-测试并重启-Nginx"><a href="#b-测试并重启-Nginx" class="headerlink" title="b. 测试并重启 Nginx"></a>b. 测试并重启 Nginx</h5><p>同样，测试配置并重启 Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nginx -t</span><br><span class="line"><span class="built_in">sudo</span> systemctl reload nginx</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-配置防火墙"><a href="#4-配置防火墙" class="headerlink" title="4. 配置防火墙"></a>4. 配置防火墙</h3><p>确保防火墙允许 HTTP（80）和如果需要的话 HTTPS（443）流量。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=http</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --permanent --add-service=https</span><br><span class="line"><span class="built_in">sudo</span> firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-配置-HTTPS（可选）"><a href="#5-配置-HTTPS（可选）" class="headerlink" title="5. 配置 HTTPS（可选）"></a>5. 配置 HTTPS（可选）</h3><p>为了提高安全性，建议为你的域名配置 SSL 证书。可以使用 <a target="_blank" rel="noopener" href="https://letsencrypt.org/">Let’s Encrypt</a> 提供的免费证书。</p>
+<h4 id="安装-Certbot"><a href="#安装-Certbot" class="headerlink" title="安装 Certbot"></a>安装 Certbot</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> yum install certbot python3-certbot-nginx -y</span><br></pre></td></tr></table></figure>
+
+<h4 id="获取并配置证书"><a href="#获取并配置证书" class="headerlink" title="获取并配置证书"></a>获取并配置证书</h4><p>针对每个域名执行以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx -d app1.example.com</span><br><span class="line"><span class="built_in">sudo</span> certbot --nginx -d app2.example.com</span><br></pre></td></tr></table></figure>
+
+<p>按照提示完成证书申请和自动配置。</p>
+<p>如果你使用的是基于路径的配置，请为主域名申请证书：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> certbot --nginx -d example.com</span><br></pre></td></tr></table></figure>
+
+<p>Certbot 会自动修改 Nginx 配置以启用 HTTPS。</p>
+<h3 id="6-优化-Nginx-配置（可选）"><a href="#6-优化-Nginx-配置（可选）" class="headerlink" title="6. 优化 Nginx 配置（可选）"></a>6. 优化 Nginx 配置（可选）</h3><p>为了提高性能和安全性，可以进行以下优化：</p>
+<h4 id="a-启用-Gzip-压缩"><a href="#a-启用-Gzip-压缩" class="headerlink" title="a. 启用 Gzip 压缩"></a>a. 启用 Gzip 压缩</h4><p>在 Nginx 配置的 <code>http</code> 块中添加：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="attribute">gzip</span> <span class="literal">on</span>;</span><br><span class="line">    <span class="attribute">gzip_types</span> text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><span class="line">    <span class="attribute">gzip_min_length</span> <span class="number">256</span>;</span><br><span class="line">    <span class="comment"># 其他配置...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="b-设置缓存头"><a href="#b-设置缓存头" class="headerlink" title="b. 设置缓存头"></a>b. 设置缓存头</h4><p>在各个 <code>location</code> 块中添加缓存头：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">location</span> /app1/ &#123;</span><br><span class="line">    <span class="attribute">alias</span> /var/www/project1/;</span><br><span class="line">    <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /app1/index.html;</span><br><span class="line">    <span class="attribute">add_header</span> Cache-Control <span class="string">&quot;public, max-age=31536000, immutable&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="c-限制访问权限"><a href="#c-限制访问权限" class="headerlink" title="c. 限制访问权限"></a>c. 限制访问权限</h4><p>根据需要，可以限制对某些文件类型的访问，或添加安全相关的头部信息。</p>
+<h3 id="7-验证部署"><a href="#7-验证部署" class="headerlink" title="7. 验证部署"></a>7. 验证部署</h3><p>完成上述步骤后，访问你的域名或路径，确认各个 Vue 应用是否正确加载。</p>
+<p>例如：</p>
+<ul>
+<li>访问 <code>http://app1.example.com</code> 或 <code>https://app1.example.com</code> 查看 <code>project1</code>。</li>
+<li>访问 <code>http://app2.example.com</code> 或 <code>https://app2.example.com</code> 查看 <code>project2</code>。</li>
+<li>如果基于路径，访问 <code>http://example.com/app1/</code> 和 <code>http://example.com/app2/</code>。</li>
+</ul>
+<h3 id="8-常见问题排查"><a href="#8-常见问题排查" class="headerlink" title="8. 常见问题排查"></a>8. 常见问题排查</h3><ul>
+<li><p><strong>404 错误或路由问题</strong>：确保 <code>try_files</code> 指令正确配置，并且 Vue Router 使用 <code>history</code> 模式时，Nginx 能够正确返回 <code>index.html</code>。</p>
+</li>
+<li><p><strong>权限问题</strong>：确保 Nginx 有权限读取 <code>/var/www/project1</code> 和 <code>/var/www/project2</code> 目录下的文件。可以调整文件夹权限或将文件所有者设置为 <code>nginx</code> 用户。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R nginx:nginx /var/www/project1</span><br><span class="line"><span class="built_in">sudo</span> <span class="built_in">chown</span> -R nginx:nginx /var/www/project2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>防火墙问题</strong>：确认防火墙已开放相应的端口（80 和 443）。</p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过以上步骤，你可以在 CentOS 系统上使用 Nginx 部署多个 Vue 前端项目。根据实际需求选择基于域名还是基于路径的部署方式，并根据需要进行进一步的优化和安全配置。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8nginx%E5%9C%A8%E4%B8%80%E5%8F%B0%E8%AE%BE%E5%A4%87%E4%B8%8A%E9%83%A8%E7%BD%B2%E5%A4%9A%E4%B8%AA%E5%89%8D%E7%AB%AF%E9%A1%B9%E7%9B%AE/" data-id="cm1m7berh0006p4u60twefxoa" data-title="如何使用nginx在一台设备上部署多个前端项目" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-如何根据安装包名称匹配合适的设备2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%89%E8%A3%85%E5%8C%85%E5%90%8D%E7%A7%B0%E5%8C%B9%E9%85%8D%E5%90%88%E9%80%82%E7%9A%84%E8%AE%BE%E5%A4%872/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T08:04:30.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/24/%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%89%E8%A3%85%E5%8C%85%E5%90%8D%E7%A7%B0%E5%8C%B9%E9%85%8D%E5%90%88%E9%80%82%E7%9A%84%E8%AE%BE%E5%A4%872/">如何根据安装包名称匹配合适的设备2</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>以下是关于如何根据GitHub开源项目Release页面上的安装包名称和后缀选择适合移动设备的指南：</p>
+<h2 id="移动设备的常见操作系统"><a href="#移动设备的常见操作系统" class="headerlink" title="移动设备的常见操作系统"></a>移动设备的常见操作系统</h2><h3 id="1-Android"><a href="#1-Android" class="headerlink" title="1. Android"></a>1. <strong>Android</strong></h3><ul>
+<li><p><strong>文件后缀</strong>：</p>
+<ul>
+<li><strong><code>.apk</code>（Android Package）</strong>：这是Android应用程序的标准安装包格式。</li>
+<li><strong><code>.aab</code>（Android App Bundle）</strong>：这是Google推荐的应用发布格式，通常由开发者上传到Google Play，系统会根据设备生成对应的APK。</li>
+</ul>
+</li>
+<li><p><strong>架构</strong>：</p>
+<ul>
+<li><strong>ARMv7（armeabi-v7a）</strong></li>
+<li><strong>ARM64（arm64-v8a）</strong></li>
+<li><strong>x86</strong></li>
+<li><strong>x86_64</strong></li>
+</ul>
+<p>不同架构的安装包名称中通常会包含这些信息，如 <code>app-v1.2.3-arm64.apk</code>。</p>
+</li>
+</ul>
+<h3 id="2-iOS"><a href="#2-iOS" class="headerlink" title="2. iOS"></a>2. <strong>iOS</strong></h3><ul>
+<li><p><strong>文件后缀</strong>：</p>
+<ul>
+<li><strong><code>.ipa</code>（iOS App Store Package）</strong>：这是iOS设备的应用安装包格式。需要通过App Store、TestFlight或企业分发进行安装。</li>
+</ul>
+</li>
+<li><p><strong>架构</strong>：</p>
+<ul>
+<li>iOS设备主要使用<strong>ARM架构</strong>（如arm64）。</li>
+</ul>
+<p>iOS的安装包通常不直接按架构区分，但开发者可能会提供不同版本支持不同iOS版本或设备。</p>
+</li>
+</ul>
+<h3 id="3-其他移动操作系统"><a href="#3-其他移动操作系统" class="headerlink" title="3. 其他移动操作系统"></a>3. <strong>其他移动操作系统</strong></h3><p>尽管市场份额较小，如<strong>HarmonyOS（华为）</strong>或<strong>KaiOS</strong>，但有时也会有对应的安装包格式（如<code>.hap</code>、<code>.xpk</code>等）。</p>
+<h2 id="按照安装包名称和后缀匹配适合设备的步骤"><a href="#按照安装包名称和后缀匹配适合设备的步骤" class="headerlink" title="按照安装包名称和后缀匹配适合设备的步骤"></a>按照安装包名称和后缀匹配适合设备的步骤</h2><h3 id="1-确认你的移动设备操作系统"><a href="#1-确认你的移动设备操作系统" class="headerlink" title="1. 确认你的移动设备操作系统"></a>1. <strong>确认你的移动设备操作系统</strong></h3><p>首先，明确你的设备运行的是哪种操作系统（Android、iOS等）。</p>
+<h3 id="2-确认设备的CPU架构（主要针对Android设备）"><a href="#2-确认设备的CPU架构（主要针对Android设备）" class="headerlink" title="2. 确认设备的CPU架构（主要针对Android设备）"></a>2. <strong>确认设备的CPU架构（主要针对Android设备）</strong></h3><p>大多数现代Android设备使用ARM或ARM64架构，但某些设备可能使用x86架构。你可以通过以下方式确认设备架构：</p>
+<ul>
+<li><strong>使用应用</strong>：如CPU-Z等系统信息应用。</li>
+<li><strong>参考设备规格</strong>：查阅设备的官方规格说明。</li>
+</ul>
+<h3 id="3-理解文件后缀与安装方式"><a href="#3-理解文件后缀与安装方式" class="headerlink" title="3. 理解文件后缀与安装方式"></a>3. <strong>理解文件后缀与安装方式</strong></h3><ul>
+<li><p><strong>Android</strong>：</p>
+<ul>
+<li><code>.apk</code>：可以直接安装，但需要在设备设置中允许“从未知来源安装应用”。</li>
+<li><code>.aab</code>：通常不直接安装，需要通过Google Play进行发布和分发。</li>
+</ul>
+</li>
+<li><p><strong>iOS</strong>：</p>
+<ul>
+<li><code>.ipa</code>：需要通过App Store、TestFlight或企业分发渠道进行安装，不能像Android一样直接安装。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-分析安装包名称"><a href="#4-分析安装包名称" class="headerlink" title="4. 分析安装包名称"></a>4. <strong>分析安装包名称</strong></h3><p>安装包的命名通常包含以下信息：</p>
+<ul>
+<li><strong>项目名称</strong>：明确应用程序名称。</li>
+<li><strong>版本号</strong>：如 <code>v1.2.3</code>，表示应用的版本。</li>
+<li><strong>操作系统</strong>：如 <code>android</code>、<code>ios</code>。</li>
+<li><strong>架构</strong>（主要针对Android）：如 <code>arm64</code>、<code>x86_64</code>。</li>
+<li><strong>文件类型</strong>：对应的文件后缀。</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<p>假设有以下几个安装包：</p>
+<ol>
+<li><code>someapp-1.2.3-android-arm64.apk</code></li>
+<li><code>someapp-1.2.3-android-x86.apk</code></li>
+<li><code>someapp-1.2.3-ios.ipa</code></li>
+</ol>
+<p><strong>选择步骤</strong>：</p>
+<ul>
+<li><strong>如果你使用的是</strong> <strong>Android 64位ARM设备</strong>，选择第1个文件（<code>someapp-1.2.3-android-arm64.apk</code>）。</li>
+<li><strong>如果你使用的是</strong> <strong>Android x86设备</strong>，选择第2个文件（<code>someapp-1.2.3-android-x86.apk</code>）。</li>
+<li><strong>如果你使用的是</strong> <strong>iOS设备</strong>，选择第3个文件（<code>someapp-1.2.3-ios.ipa</code>）。</li>
+</ul>
+<h3 id="5-参考项目文档"><a href="#5-参考项目文档" class="headerlink" title="5. 参考项目文档"></a>5. <strong>参考项目文档</strong></h3><p>有时文件名可能不够明确，或者你不确定具体选择哪个版本，可以参考项目的官方文档、README文件或安装说明，通常会有详细的安装指南和推荐版本。</p>
+<h3 id="6-使用自动化安装工具或脚本"><a href="#6-使用自动化安装工具或脚本" class="headerlink" title="6. 使用自动化安装工具或脚本"></a>6. <strong>使用自动化安装工具或脚本</strong></h3><p>一些项目可能提供自动化安装工具或脚本，这些工具会根据你的设备环境自动选择合适的安装包进行安装，减少手动选择的麻烦。例如：</p>
+<ul>
+<li><p><strong>Android</strong>：</p>
+<ul>
+<li>使用 <code>adb</code> 命令行工具安装APK：<code>adb install someapp.apk</code></li>
+</ul>
+</li>
+<li><p><strong>iOS</strong>：</p>
+<ul>
+<li>使用 <code>Xcode</code> 或 <code>TestFlight</code> 进行安装。</li>
+</ul>
+</li>
+</ul>
+<h3 id="7-验证安装包的兼容性"><a href="#7-验证安装包的兼容性" class="headerlink" title="7. 验证安装包的兼容性"></a>7. <strong>验证安装包的兼容性</strong></h3><p>在下载和安装前，确保安装包与你的设备操作系统版本和CPU架构完全匹配，以避免兼容性问题。可以通过以下方式确认：</p>
+<ul>
+<li>查看设备的操作系统版本和架构信息。</li>
+<li>查阅安装包的发布说明，确认支持的设备和系统版本。</li>
+</ul>
+<h2 id="示例解析"><a href="#示例解析" class="headerlink" title="示例解析"></a>示例解析</h2><p>假设你在GitHub的Release页面看到以下安装包：</p>
+<ol>
+<li><code>exampleapp-2.0.0-android-arm64.apk</code></li>
+<li><code>exampleapp-2.0.0-android-x86.apk</code></li>
+<li><code>exampleapp-2.0.0-ios.ipa</code></li>
+</ol>
+<p><strong>你有一台运行Android 11，使用ARM64架构的手机</strong>：</p>
+<ul>
+<li>选择 <code>exampleapp-2.0.0-android-arm64.apk</code>。</li>
+</ul>
+<p><strong>你有一台运行iOS 15的iPhone</strong>：</p>
+<ul>
+<li>选择 <code>exampleapp-2.0.0-ios.ipa</code>，并通过适当的渠道（如TestFlight）进行安装。</li>
+</ul>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p><strong>安全性</strong>：</p>
+<ul>
+<li>仅从可信的GitHub项目下载安装包，避免可能的安全风险。</li>
+<li>检查发布页面是否有签名或校验和（如SHA256），以验证安装包的完整性。</li>
+</ul>
+</li>
+<li><p><strong>权限设置</strong>（主要针对Android）：</p>
+<ul>
+<li>安装非官方来源的APK文件需要在设置中启用“允许安装未知来源”。</li>
+<li>安装后，可以关闭该权限以增强安全性。</li>
+</ul>
+</li>
+<li><p><strong>iOS的限制</strong>：</p>
+<ul>
+<li>iOS对应用安装有更严格的限制，通常需要开发者账户、签名证书或通过TestFlight进行测试分发。</li>
+<li>非越狱设备无法直接安装未授权的IPA文件。</li>
+</ul>
+</li>
+<li><p><strong>跨平台框架的特殊情况</strong>：</p>
+<ul>
+<li>某些跨平台框架（如Flutter、React Native）可能提供额外的配置或环境要求，具体安装步骤需参考项目文档。</li>
+</ul>
+</li>
+</ol>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>通过以下步骤，您可以根据GitHub Release页面上的安装包名称和后缀，选择适合移动设备的版本：</p>
+<ol>
+<li>确认设备的操作系统（Android、iOS等）。</li>
+<li>确认设备的CPU架构（主要针对Android）。</li>
+<li>理解文件后缀和安装方式。</li>
+<li>分析安装包名称中的关键信息。</li>
+<li>参考项目文档获取详细指导。</li>
+<li>使用自动化工具或脚本简化安装过程。</li>
+<li>验证安装包的兼容性，确保安全性。</li>
+</ol>
+<p>如有疑问，建议查阅具体项目的官方文档或在项目社区中寻求帮助，以获得针对您的设备和需求的最佳支持。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%89%E8%A3%85%E5%8C%85%E5%90%8D%E7%A7%B0%E5%8C%B9%E9%85%8D%E5%90%88%E9%80%82%E7%9A%84%E8%AE%BE%E5%A4%872/" data-id="cm1m7berh0007p4u604u1769t" data-title="如何根据安装包名称匹配合适的设备2" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/open-source/" rel="tag">open source</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-如何根据安装包名称匹配合适的设备" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/24/%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%89%E8%A3%85%E5%8C%85%E5%90%8D%E7%A7%B0%E5%8C%B9%E9%85%8D%E5%90%88%E9%80%82%E7%9A%84%E8%AE%BE%E5%A4%87/" class="article-date">
+  <time class="dt-published" datetime="2024-09-24T07:55:26.000Z" itemprop="datePublished">2024-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/24/%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%89%E8%A3%85%E5%8C%85%E5%90%8D%E7%A7%B0%E5%8C%B9%E9%85%8D%E5%90%88%E9%80%82%E7%9A%84%E8%AE%BE%E5%A4%87/">如何根据安装包名称匹配合适的设备</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>在GitHub开源项目的Release页面，通常会提供多种不同版本的安装包以适配不同的操作系统（如Windows、macOS、Linux）和硬件架构（如x86、x64、ARM等）。要根据安装包的名称和文件后缀选择适合自己设备的版本，可以按照以下步骤进行：</p>
+<h3 id="1-确认你的操作系统（OS）"><a href="#1-确认你的操作系统（OS）" class="headerlink" title="1. 确认你的操作系统（OS）"></a>1. <strong>确认你的操作系统（OS）</strong></h3><p>首先，你需要明确自己使用的操作系统类型。这通常是选择正确安装包的第一步。常见的操作系统包括：</p>
+<ul>
+<li><strong>Windows</strong>：后缀可能为 <code>.exe</code>、<code>.msi</code> 或者 <code>.zip</code>（便携版）</li>
+<li><strong>macOS</strong>：后缀可能为 <code>.dmg</code>、<code>.pkg</code> 或者 <code>.zip</code>（便携版）</li>
+<li><strong>Linux</strong>：后缀可能为 <code>.tar.gz</code>、<code>.AppImage</code>、<code>.deb</code>、<code>.rpm</code> 等</li>
+</ul>
+<h3 id="2-确认你的系统架构"><a href="#2-确认你的系统架构" class="headerlink" title="2. 确认你的系统架构"></a>2. <strong>确认你的系统架构</strong></h3><p>不同的安装包可能针对不同的CPU架构发布，如：</p>
+<ul>
+<li><strong>x86（32位）</strong></li>
+<li><strong>x64 &#x2F; amd64（64位）</strong></li>
+<li><strong>ARM &#x2F; ARM64</strong></li>
+</ul>
+<p>安装包的名称中通常会包含这些信息，例如 <code>someapp-win64.exe</code> 表示适用于64位Windows系统。</p>
+<h3 id="3-理解文件后缀（文件类型）"><a href="#3-理解文件后缀（文件类型）" class="headerlink" title="3. 理解文件后缀（文件类型）"></a>3. <strong>理解文件后缀（文件类型）</strong></h3><p>不同的文件后缀代表不同的安装包类型：</p>
+<ul>
+<li><p><strong>可执行安装包</strong>：</p>
+<ul>
+<li><code>.exe</code>：Windows可执行文件，通常用于安装程序</li>
+<li><code>.dmg</code>：macOS磁盘映像，用于安装或分发应用</li>
+<li><code>.AppImage</code>：Linux便携式应用格式</li>
+</ul>
+</li>
+<li><p><strong>包管理器格式</strong>：</p>
+<ul>
+<li><code>.deb</code>：Debian及其衍生系统（如Ubuntu）的包格式</li>
+<li><code>.rpm</code>：Red Hat及其衍生系统（如Fedora、CentOS）的包格式</li>
+</ul>
+</li>
+<li><p><strong>压缩包</strong>：</p>
+<ul>
+<li><code>.zip</code>、<code>.tar.gz</code>、<code>.tar.bz2</code>：通常为便携版，解压后可直接运行，不需要安装</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-分析安装包名称"><a href="#4-分析安装包名称" class="headerlink" title="4. 分析安装包名称"></a>4. <strong>分析安装包名称</strong></h3><p>安装包的名称通常会包含以下信息：</p>
+<ul>
+<li><strong>项目名称</strong>：明确是哪个项目的安装包</li>
+<li><strong>版本号</strong>：如 <code>v1.2.3</code>，表示软件的版本</li>
+<li><strong>操作系统</strong>：如 <code>windows</code>、<code>macos</code>、<code>linux</code></li>
+<li><strong>架构</strong>：如 <code>x86</code>、<code>x64</code>、<code>arm64</code></li>
+<li><strong>文件类型</strong>：对应的文件后缀</li>
+</ul>
+<p><strong>示例</strong>：</p>
+<p>假设有以下几个安装包：</p>
+<ol>
+<li><code>someapp-1.2.3-windows-x64.exe</code></li>
+<li><code>someapp-1.2.3-macos-arm64.dmg</code></li>
+<li><code>someapp-1.2.3-linux-x86_64.tar.gz</code></li>
+<li><code>someapp-1.2.3-linux-arm64.AppImage</code></li>
+</ol>
+<p><strong>选择步骤</strong>：</p>
+<ul>
+<li>如果你使用的是 <strong>Windows 64位系统</strong>，选择第1个文件。</li>
+<li>如果你使用的是 <strong>macOS搭载Apple Silicon (M1&#x2F;M2等ARM架构)的设备</strong>，选择第2个文件。</li>
+<li>如果你使用的是 **Linux 64位系统 (x86_64架构)**，选择第3个文件。</li>
+<li>如果你使用的是 <strong>Linux搭载ARM架构的设备</strong>，选择第4个文件。</li>
+</ul>
+<h3 id="5-参考项目文档"><a href="#5-参考项目文档" class="headerlink" title="5. 参考项目文档"></a>5. <strong>参考项目文档</strong></h3><p>有时文件名可能不够明确，或者你不确定具体选择哪个版本，可以参考项目的官方文档或README文件，通常会有详细的安装说明和推荐版本。</p>
+<h3 id="6-使用自动化工具"><a href="#6-使用自动化工具" class="headerlink" title="6. 使用自动化工具"></a>6. <strong>使用自动化工具</strong></h3><p>一些项目提供自动化安装工具或安装脚本（如 <code>install.sh</code>、<code>setup.exe</code> 等），这些工具会根据你的系统环境自动选择合适的版本进行安装，减少手动选择的麻烦。</p>
+<h3 id="7-验证安装包的兼容性"><a href="#7-验证安装包的兼容性" class="headerlink" title="7. 验证安装包的兼容性"></a>7. <strong>验证安装包的兼容性</strong></h3><p>在下载和安装前，确保安装包与你的系统版本和架构完全匹配，以避免兼容性问题。如果不确定，可以通过系统信息查看你的操作系统类型和CPU架构。</p>
+<p><strong>总结</strong>，通过仔细阅读安装包的名称和文件后缀，结合你设备的操作系统和硬件架构，通常可以准确选择适合的安装包。如有疑问，查阅项目文档或向项目社区寻求帮助也是有效的方法。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/24/%E5%A6%82%E4%BD%95%E6%A0%B9%E6%8D%AE%E5%AE%89%E8%A3%85%E5%8C%85%E5%90%8D%E7%A7%B0%E5%8C%B9%E9%85%8D%E5%90%88%E9%80%82%E7%9A%84%E8%AE%BE%E5%A4%87/" data-id="cm1m7berg0004p4u60vql7dlf" data-title="如何根据安装包名称匹配合适的设备" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/open-source/" rel="tag">open source</a></li></ul>
+
     </footer>
   </div>
   
@@ -169,12 +1275,33 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%B1%BB%E5%88%AB/">类别</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/" rel="tag">Promise</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/" rel="tag">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deploy/" rel="tag">deploy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/github/" rel="tag">github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/" rel="tag">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/" rel="tag">open source</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" rel="tag">反向代理</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/Promise/" style="font-size: 10px;">Promise</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/deploy/" style="font-size: 20px;">deploy</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/github/" style="font-size: 20px;">github</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/open-source/" style="font-size: 20px;">open source</a> <a href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/" style="font-size: 10px;">反向代理</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -193,11 +1320,23 @@
       <ul>
         
           <li>
-            <a href="/2024/09/25/test/">test</a>
+            <a href="/2024/09/26/nginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%AD%A6%E4%B9%A0/">test</a>
           </li>
         
           <li>
             <a href="/2024/09/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E5%85%B3%E4%BA%8EPromise/">关于Promise</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2docker%E7%AF%87/">项目部署docker篇</a>
+          </li>
+        
+          <li>
+            <a href="/2024/09/24/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">项目部署</a>
           </li>
         
       </ul>
